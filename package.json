@@ -4,7 +4,8 @@
   "description": "A simple tool for accepting community submissions (eg: feature requests) that can be voted into a priority ranking",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "DEBUG=voting:* nodemon index.js",
+    "start": "NODE_ENV=production node index.js"
   },
   "repository": {
     "type": "git",
