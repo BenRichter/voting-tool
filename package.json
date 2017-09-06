@@ -10,11 +10,31 @@
     "type": "git",
     "url": "git+https://github.com/directus/voting-tool.git"
   },
-  "keywords": ["Directus", "Features", "Voting"],
+  "keywords": [
+    "Directus",
+    "Features",
+    "Voting"
+  ],
   "author": "Rijk van Zanten <rijk@rngr.org>",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/directus/voting-tool/issues"
   },
-  "homepage": "https://github.com/directus/voting-tool#readme"
+  "homepage": "https://github.com/directus/voting-tool#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "compression": "^1.7.0",
+    "directus-sdk-javascript": "^2.1.0",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "express-session": "^1.15.5",
+    "level": "^1.7.0",
+    "level-session-store": "^2.0.2",
+    "passport": "^0.4.0",
+    "passport-github2": "^0.1.10"
+  },
+  "devDependencies": {
+    "eslint": "^4.6.1"
+  }
 }
