@@ -24,6 +24,7 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "compression": "^1.7.0",
+    "debug": "^3.0.1",
     "directus-sdk-javascript": "^2.1.0",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
@@ -35,6 +36,7 @@
     "passport-github2": "^0.1.10"
   },
   "devDependencies": {
-    "eslint": "^4.6.1"
+    "eslint": "^4.6.1",
+    "nodemon": "^1.12.0"
   }
 }
