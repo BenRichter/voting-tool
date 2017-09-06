@@ -1,0 +1,20 @@
+{
+  "name": "voting-tool",
+  "version": "0.0.0",
+  "description": "A simple tool for accepting community submissions (eg: feature requests) that can be voted into a priority ranking",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/directus/voting-tool.git"
+  },
+  "keywords": ["Directus", "Features", "Voting"],
+  "author": "Rijk van Zanten <rijk@rngr.org>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/directus/voting-tool/issues"
+  },
+  "homepage": "https://github.com/directus/voting-tool#readme"
+}
