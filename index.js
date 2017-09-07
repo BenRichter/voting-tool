@@ -3,14 +3,13 @@ const express = require('express');
 const compression = require('compression');
 const debug = require('debug');
 const passport = require('passport');
-const level = require('level');
 const session = require('express-session');
 const LevelStore = require('express-session-level')(session);
 const GithubStrategy = require('passport-github2').Strategy;
 const router = require('./routes/');
+const db = require('./db');
 require('dotenv').config();
 
-const db = level('./db');
 const httpDebug = debug('voting:http');
 const dbDebug = debug('voting:db');
 
