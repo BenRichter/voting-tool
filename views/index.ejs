@@ -8,6 +8,16 @@
     <a href="/auth">Login with GitHub</a>
 <% } %>
 
-<% locals.requests.forEach(request => { %>
-<li><%= request.title %></li>
-<% }); %>
+<ul>
+    <% locals.requests.forEach(request => { %>
+    <li data-requestid="<%= request.id %>">
+        <span><%= request.votes %></span>
+        <button data-requestid="<%= request.id %>" class="vote up">+</button>
+        <button data-requestid="<%= request.id %>" class="vote down">+</button>
+        <a href="/request/<%= request.id %>">
+            <p><%= request.title %></p>
+            <small>Requested by <%= request.username %></small>
+        </a>
+    </li>
+    <% }); %>
+</ul>
