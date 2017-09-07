@@ -20,7 +20,9 @@ if (
   !process.env.GITHUB_CLIENT_ID ||
   !process.env.GITHUB_CLIENT_SECRET ||
   !process.env.GITHUB_CALLBACK_URL ||
-  !process.env.SESSION_SECRET
+  !process.env.SESSION_SECRET ||
+  !process.env.DIRECTUS_ACCESS_TOKEN ||
+  !process.env.DIRECTUS_URL
 ) {
   console.error('Required environment variables missing');
   process.exit(1);
@@ -52,7 +54,7 @@ express()
   .listen(process.env.PORT || 3000, showServerStartedMessage);
 
 function serializeUser(profile, done) {
-  return done(null, profile.id);
+  return done(null, profile.login);
 }
 
 function deserializeUser(id, done) {
@@ -63,7 +65,8 @@ function deserializeUser(id, done) {
 }
 
 function onGitHubLogin(accessToken, refreshToken, profile, done) {
-  db.put(profile.id, JSON.stringify(profile._json), err => {
+  profile = profile._json;
+  db.put(profile.login, JSON.stringify(profile), err => {
     if (err) return done(err);
     return done(null, profile);
   });
