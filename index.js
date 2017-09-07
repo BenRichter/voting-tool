@@ -64,7 +64,7 @@ function deserializeUser(id, done) {
 }
 
 function onGitHubLogin(accessToken, refreshToken, profile, done) {
-  db.put(profile.id, JSON.stringify(profile), err => {
+  db.put(profile.id, JSON.stringify(profile._json), err => {
     if (err) return done(err);
     return done(null, profile);
   });

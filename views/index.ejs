@@ -3,7 +3,7 @@
 <h1>Homepage</h1>
 
 <% if (locals.user) { %>
-    <h1>Hi <%= locals.user.displayName %>!</h1>
+    <h1>Hi <%= locals.user.name %>!</h1>
 <% } else { %>
     <a href="/auth">Login with GitHub</a>
 <% } %>
