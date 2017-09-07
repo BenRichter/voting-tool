@@ -5,6 +5,7 @@ const debug = require('debug');
 const passport = require('passport');
 const level = require('level');
 const session = require('express-session');
+const LevelStore = require('express-session-level')(session);
 const GithubStrategy = require('passport-github2').Strategy;
 const router = require('./routes/');
 require('dotenv').config();
@@ -42,7 +43,8 @@ express()
   .use(session({
     saveUninitialized: true,
     resave: false,
-    secret: process.env.SESSION_SECRET
+    secret: process.env.SESSION_SECRET,
+    store: new LevelStore(db)
   }))
   .use(express.static(path.join(__dirname, 'public'), {maxage: '31d'}))
   .use(passport.initialize())
