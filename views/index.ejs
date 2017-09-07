@@ -7,3 +7,7 @@
 <% } else { %>
     <a href="/auth">Login with GitHub</a>
 <% } %>
+
+<% locals.requests.forEach(request => { %>
+<li><%= request.title %></li>
+<% }); %>
