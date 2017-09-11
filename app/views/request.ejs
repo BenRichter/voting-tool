@@ -28,5 +28,10 @@
             <footer><%= comment.date_relative %> &bull; <%= comment.username %></footer>
         </article>
         <% }) %>
+        <form method="post" action="comment">
+            <input type="hidden" name="request_id" value="<%= request.id %>">
+            <textarea name="content"></textarea>
+            <button type="submit">Post</button>
+        </form>
     </section>
 </article>
