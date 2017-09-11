@@ -1,3 +1,9 @@
+/**
+ * Server & index file of application
+ *
+ * Connects different express middleware functions and listens
+ *   to the provided port.
+ */
 const path = require('path');
 const express = require('express');
 const compression = require('compression');
