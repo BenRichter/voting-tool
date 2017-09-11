@@ -33,8 +33,8 @@ function deserializeUser(id, done) {
 
 function onGitHubLogin(accessToken, refreshToken, profile, done) {
   profile = profile._json;
-  db.put(profile.login, JSON.stringify(profile), err => {
-    if (err) return done(err);
-    return done(null, profile);
-  });
+
+  db.put(profile.login, JSON.stringify(profile))
+    .then(() => done(null, profile))
+    .catch(done);
 }
