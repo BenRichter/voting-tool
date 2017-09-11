@@ -1,3 +1,15 @@
 <%- include('partials/head.ejs'); %>
 
 <h1>Homepage</h1>
+
+<% if (!locals.user) { %>
+    <a href="/auth">Login with GitHub</a>
+<% } %>
+
+<ul>
+<% locals.requests.forEach(request => { %>
+    <li>
+        <a href="/r/<%= request.id %>"><%= request.title %></a>
+    </li>
+<% }) %>
+</ul>
