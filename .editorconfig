@@ -12,6 +12,6 @@ indent_size = 2
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{scss,sass,css,html}]
+[*.{scss,sass,css,html,ejs}]
 indent_size = 4
 intent_style = tab
