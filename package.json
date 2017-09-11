@@ -1,43 +1,37 @@
 {
   "name": "voting-tool",
-  "version": "0.0.0",
+  "private": true,
+  "version": "1.0.0",
   "description": "A simple tool for accepting community submissions (eg: feature requests) that can be voted into a priority ranking",
-  "main": "index.js",
+  "main": "app/index.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "compression": "^1.7.0",
+    "directus-sdk-javascript": "^2.1.0",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "express-session-level": "^1.0.0",
+    "express-session": "^1.15.5",
+    "level": "^2.0.0-rc1",
+    "passport-github2": "^0.1.10",
+    "passport": "^0.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.0"
+  },
   "scripts": {
-    "dev": "DEBUG=voting:* nodemon index.js",
-    "start": "NODE_ENV=production node index.js"
+    "dev": "nodemon app",
+    "start": "NODE_ENV=production node app"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/directus/voting-tool.git"
   },
-  "keywords": [
-    "Directus",
-    "Features",
-    "Voting"
-  ],
   "author": "Rijk van Zanten <rijk@rngr.org>",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/directus/voting-tool/issues"
   },
-  "homepage": "https://github.com/directus/voting-tool#readme",
-  "dependencies": {
-    "body-parser": "^1.17.2",
-    "compression": "^1.7.0",
-    "debug": "^3.0.1",
-    "directus-sdk-javascript": "^2.1.0",
-    "dotenv": "^4.0.0",
-    "ejs": "^2.5.7",
-    "express": "^4.15.4",
-    "express-session": "^1.15.5",
-    "express-session-level": "^1.0.0",
-    "level": "^2.0.0-rc1",
-    "passport": "^0.4.0",
-    "passport-github2": "^0.1.10"
-  },
-  "devDependencies": {
-    "eslint": "^4.6.1",
-    "nodemon": "^1.12.0"
-  }
+  "homepage": "https://github.com/directus/voting-tool#readme"
 }
