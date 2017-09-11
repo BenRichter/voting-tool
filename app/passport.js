@@ -11,6 +11,22 @@ require('dotenv').config();
 
 const db = require('./db');
 
+const serializeUser = (profile, done) => done(null, profile.login);
+
+const deserializeUser = (username, done) => {
+  db.get(username)
+    .then(user => done(null, JSON.parse(user)))
+    .catch(done);
+};
+
+const onGitHubLogin = (accessToken, refreshToken, profile, done) => {
+  profile = profile._json;
+
+  db.put(profile.login, JSON.stringify(profile))
+    .then(() => done(null, profile))
+    .catch(done);
+};
+
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 passport.use(new GithubStrategy({
@@ -20,21 +36,3 @@ passport.use(new GithubStrategy({
 }, onGitHubLogin));
 
 module.exports = passport;
-
-function serializeUser(profile, done) {
-  return done(null, profile.login);
-}
-
-function deserializeUser(id, done) {
-  db.get(id)
-    .then(user => done(null, JSON.parse(user)))
-    .catch(done);
-}
-
-function onGitHubLogin(accessToken, refreshToken, profile, done) {
-  profile = profile._json;
-
-  db.put(profile.login, JSON.stringify(profile))
-    .then(() => done(null, profile))
-    .catch(done);
-}
