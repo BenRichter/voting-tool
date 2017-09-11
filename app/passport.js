@@ -11,7 +11,9 @@ require('dotenv').config();
 
 const db = require('./db');
 
-const serializeUser = (profile, done) => done(null, profile.login);
+const directus = require('./directus');
+
+const serializeUser = (profile, done) => done(null, profile.username);
 
 const deserializeUser = (username, done) => {
   db.get(username)
@@ -21,9 +23,21 @@ const deserializeUser = (username, done) => {
 
 const onGitHubLogin = (accessToken, refreshToken, profile, done) => {
   profile = profile._json;
+  const username = profile.login;
 
-  db.put(profile.login, JSON.stringify(profile))
-    .then(() => done(null, profile))
+  const userInLocalDB = user => {
+    // Put the directus user profile in local DB for quicker session
+    //   management
+    db.put(username, JSON.stringify(user))
+      .then((res) => done(null, user))
+      .catch(done);
+  };
+
+  // Get directus user profile object in order to have access to the user's ID
+  directus.getOrCreateItem('gh_users', {
+    'in[username]': username
+  }, {username})
+    .then(userInLocalDB)
     .catch(done);
 };
 
