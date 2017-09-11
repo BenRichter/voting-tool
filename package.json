@@ -11,11 +11,13 @@
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
     "express": "^4.15.4",
-    "express-session-level": "^1.0.0",
     "express-session": "^1.15.5",
+    "express-session-level": "^1.0.0",
     "level": "^2.0.0-rc1",
+    "marked": "^0.3.6",
+    "passport": "^0.4.0",
     "passport-github2": "^0.1.10",
-    "passport": "^0.4.0"
+    "timeago.js": "^3.0.2"
   },
   "devDependencies": {
     "nodemon": "^1.12.0"
