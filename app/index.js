@@ -8,6 +8,7 @@ const path = require('path');
 const express = require('express');
 const compression = require('compression');
 const session = require('express-session');
+const bodyParser = require('body-parser');
 const LevelStore = require('express-session-level')(session);
 
 const passport = require('./passport');
@@ -24,6 +25,7 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('x-powered-by', false)
   .use(compression())
+  .use(bodyParser.urlencoded({extended: false}))
   .use(session({
     saveUninitialized: true,
     resave: false,
