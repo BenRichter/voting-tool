@@ -20,7 +20,7 @@
         <% request.comments.forEach(comment => { %>
         <article>
             <aside>
-                <img src="https://github.com/<%= request.username %>.png?size=60" alt="<%= request.username %>">
+                <img src="https://github.com/<%= comment.username %>.png?size=60" alt="<%= comment.username %>">
             </aside>
             <main>
                 <%- comment.content %>
