@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const auth = require('./auth');
 const request = require('./request');
+const vote = require('./vote');
 
 const directus = require('../directus');
 
@@ -16,5 +17,6 @@ const renderHomepage = (req, res) => {
 
 module.exports = router
   .use('/auth', auth)
+  .use('/vote', vote)
   .get('/', renderHomepage)
   .use('/r/', request);

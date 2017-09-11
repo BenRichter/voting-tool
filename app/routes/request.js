@@ -5,6 +5,7 @@ const marked = require('marked');
 const directus = require('../directus');
 
 const parseRequestData = request => ({
+  id: request.id,
   title: request.title,
   votes: request.votes_offset + request.voted_on_by.data.length,
   username: request.user.data.username,
