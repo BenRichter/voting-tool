@@ -24,6 +24,7 @@
     </form>
     <% } else { %>
         <h1><%= request.title %></h1>
+        <% if (request.edit_allowed) { %><a href="?edit=1">edit</a><% } %>
     <% } %>
     <footer>Created <time datetime="<%= request.date %>"><%= request.date_relative %></time> by <a href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
     <section>
