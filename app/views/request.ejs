@@ -1,5 +1,7 @@
 <%- include('partials/head.ejs'); %>
 
+<%= JSON.stringify(locals) %>
+
 <article>
     <aside>
         <p><%= request.votes %></p>
@@ -14,8 +16,8 @@
             <button type="submit">-</button>
         </form>
     </aside>
-    <% if (locals.editMode === true && locals.request.id === locals.user.id) { %>
-    <form method="put" action="/edit/title">
+    <% if (edit_mode && request.edit_allowed) { %>
+    <form method="post" action="/edit/title">
         <input type="text" name="title" value="<%= request.title %>">
         <button type="submit">Save</button>
     </form>
@@ -30,8 +32,10 @@
                 <img src="https://github.com/<%= comment.username %>.png?size=60" alt="<%= comment.username %>">
             </aside>
             <main>
-                <% if (locals.editMode === true && comment.user_id === locals.user.id) { %>
-                    <form method="put" action="/edit/comment">
+                <% if (edit_mode && comment.edit_allowed) { %>
+                    <form method="post" action="/edit/comment">
+                        <input type="hidden" name="comment_id" value="<%= comment.id %>">
+                        <input type="hidden" name="request_id" value="<%= request.id %>">
                         <textarea name="content"><%= comment.content %></textarea>
                         <button type="submit">Save</button>
                     </form>
@@ -39,7 +43,7 @@
                     <%- comment.content_parsed %>
                 <% } %>
             </main>
-            <footer><%= comment.date_relative %> &bull; <%= comment.username %></footer>
+            <footer><%= comment.date_relative %> &bull; <%= comment.username %> <% if (comment.edited) { %>&bull; edited<% } %></footer>
         </article>
         <% }) %>
         <form method="post" action="/comment">

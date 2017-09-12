@@ -13,7 +13,7 @@ const placeComment = (req, res) => {
     user_id: userID,
     request_id,
     content,
-    date: 'NOW()',
+    date: new Date().toISOString().slice(0, 10),
     active: 1
   })
     .then(() => res.redirect('/r/' + request_id))
