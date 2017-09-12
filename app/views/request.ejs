@@ -44,7 +44,7 @@
                     <%- comment.content_parsed %>
                 <% } %>
             </main>
-            <footer><%= comment.date_relative %> &bull; <%= comment.username %> <% if (comment.edited) { %>&bull; edited<% } %></footer>
+            <footer><% if (comment.edit_allowed) { %><a href="?edit=1">edit</a> &bull; <% } %><%= comment.date_relative %> &bull; <%= comment.username %> <% if (comment.edited) { %>&bull; edited<% } %></footer>
         </article>
         <% }) %>
         <form method="post" action="/comment">
