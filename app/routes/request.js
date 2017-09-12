@@ -4,6 +4,12 @@ const marked = require('marked');
 
 const directus = require('../directus');
 
+const parseDate = dateString => {
+  const parts = dateString.split(/[- :]/);
+  parts[1] = parts[1] - 1;
+  return new Date(...parts);
+}
+
 const parseRequestData = (request, user) => ({
   id: request.id,
   title: request.title,
@@ -11,8 +17,8 @@ const parseRequestData = (request, user) => ({
   username: request.user.data.username,
   user_id: request.user.data.id,
   closed: Boolean(request.closed),
-  date: new Date(...request.date.split('-')),
-  date_relative: timeago().format(new Date(...request.date.split('-'))),
+  date: request.date,
+  date_relative: timeago().format(parseDate(request.date)),
   edit_allowed: request.user.data.id === user.id,
   comments: request.comments.data
     .filter(comment => comment.active === 1)
@@ -31,7 +37,8 @@ const parseRequestData = (request, user) => ({
       edit_allowed: comment.user_id === user.id,
 
       id: comment.id,
-      date_relative: timeago().format(new Date(...comment.date.split('-'))),
+      date: comment.date,
+      date_relative: timeago().format(parseDate(comment.date)),
       edited: Boolean(comment.last_updated && comment.date !== comment.last_updated),
       date: comment.date,
       last_updated: comment.last_updated
