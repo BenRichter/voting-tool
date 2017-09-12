@@ -18,10 +18,7 @@ const placeComment = (req, res) => {
     date: jsToMysql(new Date()),
     active: 1
   })
-    .then((doc) => {
-      console.log(doc);
-      res.redirect('/r/' + request_id);
-    })
+    .then((doc) => res.redirect('/r/' + request_id))
     .catch(err => {
       console.error(err);
       res.status(500).end();
