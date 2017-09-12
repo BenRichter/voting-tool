@@ -9,6 +9,20 @@ const client = new DirectusSDK({
   accessToken: process.env.DIRECTUS_ACCESS_TOKEN
 });
 
+client.findAndDeleteItem = async function(tableName, params = {}, data = {}) {
+  // Limit the amount of returned objects from the API to 1,
+  //   since we're only looking if a specific one exists
+  params = Object.assign({}, params, {
+    limit: 1
+  });
+
+  const {data: userProfiles} = await this.getItems(tableName, params);
+
+  const id = userProfiles[0].id;
+
+  return this.deleteItem(tableName, id);
+}
+
 /**
  * Convenience function which will check if an item exists based on the params
  *   given and will create a new one with the passed data if not

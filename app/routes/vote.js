@@ -20,13 +20,37 @@ const hasUserVotedAlready = (userID, requestID) => {
   });
 }
 
-const voteMinus = (req, res) => { res.redirect('/'); }
+const voteMinus = async (req, res) => {
+  const requestID = req.body.request_id;
+  const userID = req.user.id;
+  const username = req.user.username;
+
+  // If user hasn't voted for this item, redirect back without doing anything
+  if (await hasUserVotedAlready(userID, requestID) === false) {
+    return res.redirect('/r/' + requestID);
+  }
+
+  // Delete junction table record
+  directus.findAndDeleteItem('voted_on', {
+    'in[gh_user_id]': userID,
+    'in[request_id]': requestID
+  })
+    // Get updated user profile
+    .then(() => directus.getItem('gh_users', userID))
+    .then(({data: userProfile}) => db.put(username, JSON.stringify(userProfile)))
+    .then(() => res.redirect('/r/' + requestID))
+    .catch(err => {
+      console.error(err);
+      res.status(500).end();
+    });
+}
+
 const votePlus = async (req, res) => {
   const requestID = req.body.request_id;
   const userID = req.user.id;
   const username = req.user.username;
 
-  // If user has voted already, redirect back home without doing anything
+  // If user has voted already, redirect back without doing anything
   if (await hasUserVotedAlready(userID, requestID)) return res.redirect('/r/' + requestID);
 
   // Create Directus voted_on junction table item
