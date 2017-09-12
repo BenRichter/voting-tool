@@ -12,11 +12,13 @@ const parseRequestData = request => ({
   closed: Boolean(request.closed),
   date: new Date(...request.date.split('-')),
   date_relative: timeago().format(new Date(...request.date.split('-'))),
-  comments: request.comments.data.map(comment => ({
-    content: marked(comment.content),
-    username: comment.user_id,
-    date_relative: timeago().format(new Date(...comment.date.split('-'))),
-  }))
+  comments: request.comments.data
+    .filter(comment => comment.active === 1)
+    .map(comment => ({
+      content: marked(comment.content),
+      username: comment.user_id,
+      date_relative: timeago().format(new Date(...comment.date.split('-'))),
+    }))
 });
 
 const renderRequest = (req, res) => {
