@@ -21,11 +21,33 @@ const hasUserVotedAlready = (userID, requestID) => {
 }
 
 const voteMinus = (req, res) => { res.redirect('/'); }
-const votePlus = (req, res) => { res.redirect('/'); }
+const votePlus = async (req, res) => {
+  const requestID = req.body.request_id;
+  const userID = req.user.id;
+  const username = req.user.username;
+
+  // If user has voted already, redirect back home without doing anything
+  if (await hasUserVotedAlready(userID, requestID)) return res.redirect('/r/' + requestID);
+
+  // Create Directus voted_on junction table item
+  directus.createItem('voted_on', {
+    gh_user_id: userID,
+    request_id: requestID
+  })
+    // Get updated user profile
+    .then(() => directus.getItem('gh_users', userID))
+    .then(({data: userProfile}) => db.put(username, JSON.stringify(userProfile)))
+    .then(() => res.redirect('/r/' + requestID))
+    .catch(err => {
+      console.error(err);
+      res.status(500).end();
+    });
+}
 
 const vote = (req, res) => {
   const {request_id, action} = req.body;
 
+  // If no user session, redirect back to the page without doing anything else
   if (!req.user) return res.redirect('/r/' + request_id);
 
   if (req.body.action === 'minus') return voteMinus(req, res);
