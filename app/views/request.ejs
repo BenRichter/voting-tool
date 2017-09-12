@@ -14,7 +14,14 @@
             <button type="submit">-</button>
         </form>
     </aside>
-    <h1><%= request.title %></h1>
+    <% if (locals.editMode === true && locals.request.id === locals.user.id) { %>
+    <form method="put" action="/edit/title">
+        <input type="text" name="title" value="<%= request.title %>">
+        <button type="submit">Save</button>
+    </form>
+    <% } else { %>
+        <h1><%= request.title %></h1>
+    <% } %>
     <footer>Created <time datetime="<%= request.date %>"><%= request.date_relative %></time> by <a href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
     <section>
         <% request.comments.forEach(comment => { %>
@@ -23,7 +30,14 @@
                 <img src="https://github.com/<%= comment.username %>.png?size=60" alt="<%= comment.username %>">
             </aside>
             <main>
-                <%- comment.content %>
+                <% if (locals.editMode === true && comment.user_id === locals.user.id) { %>
+                    <form method="put" action="/edit/comment">
+                        <textarea name="content"><%= comment.content %></textarea>
+                        <button type="submit">Save</button>
+                    </form>
+                <% } else { %>
+                    <%- comment.content_parsed %>
+                <% } %>
             </main>
             <footer><%= comment.date_relative %> &bull; <%= comment.username %></footer>
         </article>
