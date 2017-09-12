@@ -9,6 +9,14 @@ const client = new DirectusSDK({
   accessToken: process.env.DIRECTUS_ACCESS_TOKEN
 });
 
+/**
+ * Convenience function which will fetch a single item's ID and delete that
+ *   particular item
+ * @param  {String} tableName
+ * @param  {Object} [params={}] [description]
+ * @param  {Object} [data={}]   [description]
+ * @return {Promise} resolves empty
+ */
 client.findAndDeleteItem = async function(tableName, params = {}, data = {}) {
   // Limit the amount of returned objects from the API to 1,
   //   since we're only looking if a specific one exists
