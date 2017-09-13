@@ -16,6 +16,13 @@ const parseDate = dateString => {
 };
 
 /**
+ * Converts a JS date object to YYYY-MM-DD HH:MM:SS string
+ * @param  {Date} dateObj
+ * @return {String}
+ */
+const dateToString = dateObj => `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-${dateObj.getDate()} ${dateObj.getHours()}:${dateObj.getMinutes()}:${dateObj.getSeconds()}`;
+
+/**
  * Returns `voted up`|`voted down` based on userVotes object and current username
  * @param  {Object} userVotes Object [username]: [-1 | 1]
  * @param  {String} username  username to match to
@@ -106,5 +113,34 @@ const renderRequest = (req, res) => {
     });
 };
 
+const updateRequest = (req, res) => {
+  const username = req.user;
+  const id = req.params.id;
+  const newTitle = req.body.title;
+
+  // Get request from DB
+  directus
+    .getItem('requests', id)
+
+    // If current logged in user is the creator of the request, update the
+    //   item in Directus. Else, redirect back without doing anything
+    .then(({data}) => {
+      if (data.username === username) {
+        return directus.updateItem('requests', id, {
+          title: newTitle
+        })
+      }
+      return res.redirect('/r/' + id);
+    })
+
+    // Redirect back to the original post when the update is done
+    .then(() => res.redirect('/r/' + id))
+    .catch(err => {
+      console.error(err);
+      return res.status(500).end();
+    })
+};
+
 module.exports = router
-  .get('/:id', renderRequest);
+  .get('/:id', renderRequest)
+  .post('/:id', updateRequest);

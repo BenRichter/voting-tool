@@ -15,8 +15,7 @@
         </form>
     </aside>
     <% if (editMode && request.editAllowed) { %>
-    <form method="post" action="/edit/request">
-        <input type="hidden" name="request_id" value="<%= request.id %>">
+    <form method="post" action="/r/<%= request.id %>">
         <input type="text" name="title" value="<%= request.title %>">
         <button type="submit">Save</button>
     </form>
