@@ -1,7 +1,4 @@
 const router = require('express').Router();
-const Encoder = require('node-html-encoder').Encoder;
-
-const encoder = new Encoder('entity');
 
 const {dateToString} = require('../utils');
 const directus = require('../directus');
@@ -16,7 +13,7 @@ const createOrUpdateComment = (req, res) => {
   const rawComment = req.body;
 
   const comment = {
-    content: encoder.htmlEncode(rawComment.content),
+    content: rawComment.content,
     last_updated: dateToString(new Date()),
     username
   };
