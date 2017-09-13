@@ -1,6 +1,11 @@
 const marked = require('marked');
 const dateToRelative = require('timeago.js')().format;
 
+marked.setOptions({
+  gfm: true,
+  sanitize: true
+});
+
 /**
  * Parses a mysql date [YYYY-MM-DD HH:MM:SS] to a JS Date object
  * @param  {String} dateString YYYY-MM-DD HH:MM:SS
@@ -56,7 +61,8 @@ const parseRequestData = (request, username) => {
     .map(comment => {
       const editAllowed = (comment.username === username);
 
-      const content = marked(comment.content);
+      const content = comment.content;
+      const contentParsed = marked(content);
       const date = parseDate(comment.date);
       const dateRelative = dateToRelative(date);
 
@@ -69,6 +75,7 @@ const parseRequestData = (request, username) => {
         id: comment.id,
         username: comment.username,
         content,
+        contentParsed,
         edited,
         userVote,
         date,
