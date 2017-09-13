@@ -1,1 +1,32 @@
-<pre><%= JSON.stringify(locals, false, '  ') %></pre>
+<%- include('partials/head.ejs'); %>
+
+<article>
+    <aside>
+        <p class="votes-count"><%= request.votes %></p>
+        <form method="post" action="/vote">
+            <input type="hidden" name="request_id" value="<%= request.id %>">
+            <input type="hidden" name="action" value="plus">
+            <button type="submit">+</button>
+        </form>
+        <form method="post" action="/vote">
+            <input type="hidden" name="request_id" value="<%= request.id %>">
+            <input type="hidden" name="action" value="minus">
+            <button type="submit">-</button>
+        </form>
+    </aside>
+    <h1><%= request.title %></h1>
+    <footer>Created <time datetime="<%= request.date %>"><%= request.dateRelative %></time> by <a href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
+    <section>
+        <% request.comments.forEach(comment => { %>
+        <article>
+            <aside>
+                <img src="https://github.com/<%= comment.username %>.png?size=60" alt="<%= comment.username %>">
+            </aside>
+            <main>
+                <%- comment.content %>
+            </main>
+            <footer><% if (comment.userVote) { %><%= comment.userVote %> &bull; <% } %><time datetime="<%= comment.date %>"><%= comment.dateRelative %></time> &bull; <%= comment.username %> <% if (comment.edited) { %>&bull; edited<% } %></footer>
+        </article>
+        <% }) %>
+    </section>
+</article>

@@ -16,6 +16,17 @@ const parseDate = dateString => {
 };
 
 /**
+ * Returns `voted up`|`voted down` based on userVotes object and current username
+ * @param  {Object} userVotes Object [username]: [-1 | 1]
+ * @param  {String} username  username to match to
+ * @return {String}           `voted up`|`voted down`
+ */
+const getUserVote = (userVotes, username) => {
+  const value = userVotes[username];
+  return value === 1 ? 'voted up' : 'voted down';
+};
+
+/**
  * Parses a single request down to a usable data object to be rendered
  * Adds in an editAllowed flag, relative dates, and parsed markdown content
  * @param  {Object} request  Single request object from Directus
@@ -48,13 +59,15 @@ const parseRequestData = (request, username) => {
       const dateRelative = dateToRelative(date);
 
       // Either -1, 1 or
-      const userVoted = userVotes[comment.username] || null;
+      const userHasVoted = userVotes.hasOwnProperty(comment.username);
+
+      let userVote = userHasVoted ? getUserVote(userVotes, username) : null;
 
       return {
         id: comment.id,
         username: comment.username,
         content,
-        userVoted,
+        userVote,
         date,
         dateRelative,
         editAllowed
@@ -64,6 +77,7 @@ const parseRequestData = (request, username) => {
   const result = {
     id: request.id,
     username: request.username,
+    title: request.title,
     date,
     dateRelative,
     editAllowed,
