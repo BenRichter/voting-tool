@@ -6,10 +6,14 @@ const vote = require('./vote');
 const comment = require('./comment');
 
 const directus = require('../directus');
+const {parseDate, dateToString, parseRequestData} = require('../utils');
 
 const renderHomepage = (req, res) => {
-  directus.getItems('requests')
-    .then(({data: requests}) => res.render('index', {user: req.user, requests}))
+  directus.getItems('requests', {
+    depth: 1
+  })
+    .then(({data}) => data.map(parseRequestData))
+    .then(requests => res.render('index', {requests}))
     .catch(err => {
       console.error(err);
       res.status(500).end();

@@ -6,10 +6,25 @@
     <a href="/auth">Login with GitHub</a>
 <% } %>
 
-<ul>
 <% locals.requests.forEach(request => { %>
-    <li>
-        <a href="/r/<%= request.id %>"><%= request.title %></a>
-    </li>
+<article>
+    <aside>
+        <p class="votes-count"><%= request.score %></p>
+        <form method="post" action="/vote">
+            <input type="hidden" name="request_id" value="<%= request.id %>">
+            <input type="hidden" name="action" value="plus">
+            <button type="submit">+</button>
+        </form>
+        <form method="post" action="/vote">
+            <input type="hidden" name="request_id" value="<%= request.id %>">
+            <input type="hidden" name="action" value="minus">
+            <button type="submit">-</button>
+        </form>
+    </aside>
+    <h1><%= request.title %></h1>
+    <footer>Created <time datetime="<%= request.date %>"><%= request.dateRelative %></time> by <a href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
+    <div>
+        <% if (request.comments.length > 0) { %><%= request.comments.length %><% } %>
+    </div>
+</article>
 <% }) %>
-</ul>

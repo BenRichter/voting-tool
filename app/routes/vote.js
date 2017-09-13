@@ -38,12 +38,13 @@ const vote = (req, res) => {
       // If not, create record
       const newVote = {
         value: action === 'plus' ? 1 : -1,
+        request_id: id,
         username
       };
 
       return directus.createItem('votes', newVote);
     })
-    .then(() => res.redirect('/r/' + id))
+    .then(() => res.redirect(req.header('Referer')))
     .catch(err => {
       console.error(err);
       res.status(500).end();
