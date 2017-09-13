@@ -42,7 +42,13 @@
                 <%- comment.content %>
             <% } %>
             </main>
-            <footer><% if (comment.userVote) { %><%= comment.userVote %> &bull; <% } %><time datetime="<%= comment.date %>"><%= comment.dateRelative %></time> &bull; <%= comment.username %> <% if (comment.edited) { %>&bull; edited<% } %><% if (comment.editAllowed) { %> &bull; <a href="?edit=1">edit</a><% } %></footer>
+            <footer>
+                <% if (comment.userVote) { %><%= comment.userVote %> &bull;<% } %>
+                <time datetime="<%= comment.date %>"><%= comment.dateRelative %></time> &bull;
+                <a href="https://github.com/<%= comment.username %>"><%= comment.username %></a>
+                <% if (comment.edited) { %>&bull; edited<% } %>
+                <% if (comment.editAllowed) { %> &bull; <a href="?edit=1">edit</a><% } %>
+            </footer>
         </article>
         <% }) %>
         <form method="post" action="/comment">
