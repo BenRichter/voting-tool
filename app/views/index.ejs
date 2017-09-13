@@ -4,6 +4,8 @@
     <a href="/auth">Login with GitHub</a>
 <% } %>
 
+<a href="#suggest-feature">Suggest a Feature</a>
+
 <% locals.requests.forEach(request => { %>
 <article>
     <aside>
@@ -27,7 +29,7 @@
 </article>
 <% }) %>
 
-<form method="post" action="/r/new">
+<form method="post" action="/r/new" id="suggest-feature">
     <label for="title">Title</label>
     <input id="title" type="text" name="title">
 
