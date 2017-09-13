@@ -2,25 +2,9 @@ const router = require('express').Router();
 const marked = require('marked');
 const dateToRelative = require('timeago.js')().format;
 
+const {parseDate, dateToString} = require('../utils');
 const directus = require('../directus');
-
-/**
- * Parses a mysql date [YYYY-MM-DD HH:MM:SS] to a JS Date object
- * @param  {String} dateString YYYY-MM-DD HH:MM:SS
- * @return {Date}              JS Date object
- */
-const parseDate = dateString => {
-  const parts = dateString.split(/[- :]/);
-  parts[1] = parts[1] - 1;
-  return new Date(...parts);
-};
-
-/**
- * Converts a JS date object to YYYY-MM-DD HH:MM:SS string
- * @param  {Date} dateObj
- * @return {String}
- */
-const dateToString = dateObj => `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-${dateObj.getDate()} ${dateObj.getHours()}:${dateObj.getMinutes()}:${dateObj.getSeconds()}`;
+const comment = require('./comment');
 
 /**
  * Returns `voted up`|`voted down` based on userVotes object and current username
@@ -53,6 +37,8 @@ const parseRequestData = (request, username) => {
   const upvotesCount = upvotes.length + request.votes_offset;
   const downvotesCount = downvotes.length;
 
+  const edited = request.last_updated && request.last_updated !== request.date;
+
   // Object {[username]: vote} to later match comments against
   const userVotes = {};
   votes.forEach(({username, value}) => (userVotes[username] = value));
@@ -65,6 +51,8 @@ const parseRequestData = (request, username) => {
       const date = parseDate(comment.date);
       const dateRelative = dateToRelative(date);
 
+      const edited = comment.last_updated && comment.last_updated !== comment.date;
+
       const userHasVoted = userVotes.hasOwnProperty(comment.username);
       let userVote = userHasVoted ? getUserVote(userVotes, username) : null;
 
@@ -72,6 +60,7 @@ const parseRequestData = (request, username) => {
         id: comment.id,
         username: comment.username,
         content,
+        edited,
         userVote,
         date,
         dateRelative,
@@ -86,8 +75,10 @@ const parseRequestData = (request, username) => {
     date,
     dateRelative,
     editAllowed,
+    edited,
     upvotesCount,
     downvotesCount,
+    score: upvotesCount - downvotesCount,
     comments
   }
 
@@ -97,6 +88,9 @@ const parseRequestData = (request, username) => {
 const renderRequest = (req, res) => {
   const id = req.params.id;
   const username = req.user;
+
+  // Redirect back home if user isn't logged in
+  if (!username) return res.redirect('/');
 
   // Set editMode flag when the query param `edit` is set to a truthy value
   const editMode = Boolean(req.query.edit) || false;
@@ -127,8 +121,9 @@ const updateRequest = (req, res) => {
     .then(({data}) => {
       if (data.username === username) {
         return directus.updateItem('requests', id, {
-          title: newTitle
-        })
+          title: newTitle,
+          last_updated: dateToString(new Date())
+        });
       }
       return res.redirect('/r/' + id);
     })

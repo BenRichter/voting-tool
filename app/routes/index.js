@@ -19,6 +19,6 @@ const renderHomepage = (req, res) => {
 module.exports = router
   .use('/auth', auth)
   .use('/vote', vote)
-  .use('/comment', comment)
   .get('/', renderHomepage)
+  .use('/comment', comment)
   .use('/r/', request);

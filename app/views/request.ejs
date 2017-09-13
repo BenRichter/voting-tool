@@ -2,7 +2,7 @@
 
 <article>
     <aside>
-        <p class="votes-count"><%= request.votes %></p>
+        <p class="votes-count"><%= request.score %></p>
         <form method="post" action="/vote">
             <input type="hidden" name="request_id" value="<%= request.id %>">
             <input type="hidden" name="action" value="plus">
@@ -32,7 +32,7 @@
             </aside>
             <main>
             <% if (editMode && comment.editAllowed) { %>
-                <form method="post" action="/edit/comment">
+                <form method="post" action="/comment">
                     <input type="hidden" name="comment_id" value="<%= comment.id %>">
                     <input type="hidden" name="request_id" value="<%= request.id %>">
                     <textarea name="content"><%= comment.content %></textarea>
@@ -42,8 +42,13 @@
                 <%- comment.content %>
             <% } %>
             </main>
-            <footer><% if (comment.userVote) { %><%= comment.userVote %> &bull; <% } %><time datetime="<%= comment.date %>"><%= comment.dateRelative %></time> &bull; <%= comment.username %> <% if (comment.edited) { %>&bull; edited<% } %></footer>
+            <footer><% if (comment.userVote) { %><%= comment.userVote %> &bull; <% } %><time datetime="<%= comment.date %>"><%= comment.dateRelative %></time> &bull; <%= comment.username %> <% if (comment.edited) { %>&bull; edited<% } %><% if (comment.editAllowed) { %> &bull; <a href="?edit=1">edit</a><% } %></footer>
         </article>
         <% }) %>
+        <form method="post" action="/comment">
+            <input type="hidden" name="request_id" value="<%= request.id %>">
+            <textarea name="content"></textarea>
+            <button type="submit">Post</button>
+        </form>
     </section>
 </article>
