@@ -58,9 +58,7 @@ const parseRequestData = (request, username) => {
       const date = parseDate(comment.date);
       const dateRelative = dateToRelative(date);
 
-      // Either -1, 1 or
       const userHasVoted = userVotes.hasOwnProperty(comment.username);
-
       let userVote = userHasVoted ? getUserVote(userVotes, username) : null;
 
       return {
@@ -93,11 +91,15 @@ const renderRequest = (req, res) => {
   const id = req.params.id;
   const username = req.user;
 
+  // Set editMode flag when the query param `edit` is set to a truthy value
+  const editMode = Boolean(req.query.edit) || false;
+
   directus
     .getItem('requests', id)
     .then(response => response.data)
     .then(data => parseRequestData(data, username))
-    .then(request => res.render('request', {request}))
+    .then(request => ({request, editMode})) // add editMode key to locals
+    .then(locals => res.render('request', locals))
     .catch(err => {
       console.error(err);
       res.status(500).end();

@@ -14,7 +14,16 @@
             <button type="submit">-</button>
         </form>
     </aside>
-    <h1><%= request.title %></h1>
+    <% if (editMode && request.editAllowed) { %>
+    <form method="post" action="/edit/request">
+        <input type="hidden" name="request_id" value="<%= request.id %>">
+        <input type="text" name="title" value="<%= request.title %>">
+        <button type="submit">Save</button>
+    </form>
+    <% } else { %>
+        <h1><%= request.title %></h1>
+        <% if (request.editAllowed) { %><a href="?edit=1">edit</a><% } %>
+    <% } %>
     <footer>Created <time datetime="<%= request.date %>"><%= request.dateRelative %></time> by <a href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
     <section>
         <% request.comments.forEach(comment => { %>
@@ -23,7 +32,16 @@
                 <img src="https://github.com/<%= comment.username %>.png?size=60" alt="<%= comment.username %>">
             </aside>
             <main>
+            <% if (editMode && comment.editAllowed) { %>
+                <form method="post" action="/edit/comment">
+                    <input type="hidden" name="comment_id" value="<%= comment.id %>">
+                    <input type="hidden" name="request_id" value="<%= request.id %>">
+                    <textarea name="content"><%= comment.content %></textarea>
+                    <button type="submit">Save</button>
+                </form>
+            <% } else { %>
                 <%- comment.content %>
+            <% } %>
             </main>
             <footer><% if (comment.userVote) { %><%= comment.userVote %> &bull; <% } %><time datetime="<%= comment.date %>"><%= comment.dateRelative %></time> &bull; <%= comment.username %> <% if (comment.edited) { %>&bull; edited<% } %></footer>
         </article>
