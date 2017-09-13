@@ -15,6 +15,7 @@ const renderHomepage = (req, res) => {
     depth: 1
   })
     .then(({data}) => data.map(parseRequestData))
+    .then(requests => requests.sort((a, b) => a.score < b.score ? 1 : -1))
     .then(requests => res.render('index', {loggedIn, requests}))
     .catch(err => {
       console.error(err);
