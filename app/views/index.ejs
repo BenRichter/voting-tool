@@ -1,8 +1,6 @@
 <%- include('partials/head.ejs'); %>
 
-<h1>Homepage</h1>
-
-<% if (!locals.user) { %>
+<% if (!locals.loggedIn) { %>
     <a href="/auth">Login with GitHub</a>
 <% } %>
 
@@ -21,10 +19,10 @@
             <button type="submit">-</button>
         </form>
     </aside>
-    <h1><%= request.title %></h1>
+    <h1><a href="/r/<%= request.id %>"><%= request.title %></a></h1>
     <footer>Created <time datetime="<%= request.date %>"><%= request.dateRelative %></time> by <a href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
-    <div>
+    <a href="/r/<%= request.id %>">
         <% if (request.comments.length > 0) { %><%= request.comments.length %><% } %>
-    </div>
+    </a>
 </article>
 <% }) %>

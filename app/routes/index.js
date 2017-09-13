@@ -9,11 +9,13 @@ const directus = require('../directus');
 const {parseDate, dateToString, parseRequestData} = require('../utils');
 
 const renderHomepage = (req, res) => {
+  const loggedIn = req.user && req.user.length > 0;
+
   directus.getItems('requests', {
     depth: 1
   })
     .then(({data}) => data.map(parseRequestData))
-    .then(requests => res.render('index', {requests}))
+    .then(requests => res.render('index', {loggedIn, requests}))
     .catch(err => {
       console.error(err);
       res.status(500).end();
