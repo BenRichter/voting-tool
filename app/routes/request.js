@@ -1,59 +1,89 @@
 const router = require('express').Router();
-const timeago = require('timeago.js');
 const marked = require('marked');
+const dateToRelative = require('timeago.js')().format;
 
 const directus = require('../directus');
 
+/**
+ * Parses a mysql date [YYYY-MM-DD HH:MM:SS] to a JS Date object
+ * @param  {String} dateString YYYY-MM-DD HH:MM:SS
+ * @return {Date}              JS Date object
+ */
 const parseDate = dateString => {
   const parts = dateString.split(/[- :]/);
   parts[1] = parts[1] - 1;
   return new Date(...parts);
+};
+
+/**
+ * Parses a single request down to a usable data object to be rendered
+ * Adds in an editAllowed flag, relative dates, and parsed markdown content
+ * @param  {Object} request  Single request object from Directus
+ * @param  {String} username Logged in user
+ * @return {Object}          Single request object parsed
+ */
+const parseRequestData = (request, username) => {
+  const editAllowed = (request.username === username);
+
+  const date = parseDate(request.date);
+  const dateRelative = dateToRelative(date);
+
+  const votes = request.votes.data;
+  const upvotes = votes.filter(vote => vote.value === 1);
+  const downvotes = votes.filter(vote => vote.value === -1);
+
+  const upvotesCount = upvotes.length + request.votes_offset;
+  const downvotesCount = downvotes.length;
+
+  // Object {[username]: vote} to later match comments against
+  const userVotes = {};
+  votes.forEach(({username, value}) => (userVotes[username] = value));
+
+  const comments = request.comments.data
+    .map(comment => {
+      const editAllowed = (comment.username === username);
+
+      const content = marked(comment.content);
+      const date = parseDate(comment.date);
+      const dateRelative = dateToRelative(date);
+
+      // Either -1, 1 or
+      const userVoted = userVotes[comment.username] || null;
+
+      return {
+        id: comment.id,
+        username: comment.username,
+        content,
+        userVoted,
+        date,
+        dateRelative,
+        editAllowed
+      }
+    });
+
+  const result = {
+    id: request.id,
+    username: request.username,
+    date,
+    dateRelative,
+    editAllowed,
+    upvotesCount,
+    downvotesCount,
+    comments
+  }
+
+  return result;
 }
 
-const parseRequestData = (request, user) => ({
-  id: request.id,
-  title: request.title,
-  votes: request.votes_offset + request.voted_on_by.data.length,
-  username: request.user.data.username,
-  user_id: request.user.data.id,
-  closed: Boolean(request.closed),
-  date: request.date,
-  date_relative: timeago().format(parseDate(request.date)),
-  edit_allowed: request.user.data.id === user.id,
-  comments: request.comments.data
-    .filter(comment => comment.active === 1)
-    .map(comment => ({
-      content_parsed: marked(comment.content),
-      content: comment.content,
-
-      // Bug: directus/directus#1806
-      // username: comment.user.data.username,
-      // user_id: comment.user.data.id,
-
-      username: comment.user_id,
-      user_id: comment.user_id,
-
-      // edit_allowed: comment.user_id === user.id,
-      edit_allowed: comment.user_id === user.id,
-
-      id: comment.id,
-      date: comment.date,
-      date_relative: timeago().format(parseDate(comment.date)),
-      edited: Boolean(comment.last_updated && comment.date !== comment.last_updated),
-      date: comment.date,
-      last_updated: comment.last_updated
-    }))
-});
-
 const renderRequest = (req, res) => {
-  directus.getItem('requests', req.params.id)
-    // .then(({data: request}) => request)
-    .then(({data: request}) => ({request: parseRequestData(request, req.user)}))
-    .then(locals => {
-      locals.edit_mode = Boolean(req.query.edit);
-      return locals;
-    })
-    .then(locals => res.render('request', locals))
+  const id = req.params.id;
+  const username = req.user;
+
+  directus
+    .getItem('requests', id)
+    .then(response => response.data)
+    .then(data => parseRequestData(data, username))
+    .then(request => res.render('request', {request}))
     .catch(err => {
       console.error(err);
       res.status(500).end();

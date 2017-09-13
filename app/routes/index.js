@@ -4,7 +4,6 @@ const auth = require('./auth');
 const request = require('./request');
 const vote = require('./vote');
 const comment = require('./comment');
-const edit = require('./edit');
 
 const directus = require('../directus');
 
@@ -21,6 +20,5 @@ module.exports = router
   .use('/auth', auth)
   .use('/vote', vote)
   .use('/comment', comment)
-  .use('/edit', edit)
   .get('/', renderHomepage)
   .use('/r/', request);

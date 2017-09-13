@@ -9,11 +9,13 @@ const express = require('express');
 const compression = require('compression');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const level = require('level');
 const LevelStore = require('express-session-level')(session);
 
 const passport = require('./passport');
-const db = require('./db');
 const router = require('./routes/');
+
+const db = level('./db');
 
 // Inject variables from .env file to process.env object
 require('dotenv').config();
