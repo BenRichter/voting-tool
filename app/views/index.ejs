@@ -11,22 +11,28 @@
 	<article>
 		<aside>
 			<p class="votes-count"><%= request.score %></p>
-			<form method="post" action="/vote">
-				<input type="hidden" name="request_id" value="<%= request.id %>">
-				<input type="hidden" name="action" value="plus">
-				<button type="submit">+</button>
-			</form>
-			<form method="post" action="/vote">
-				<input type="hidden" name="request_id" value="<%= request.id %>">
-				<input type="hidden" name="action" value="minus">
-				<button type="submit">-</button>
-			</form>
+			<div class="vote-buttons">
+				<form method="post" action="/vote">
+					<input type="hidden" name="request_id" value="<%= request.id %>">
+					<input type="hidden" name="action" value="plus">
+					<button type="submit">+</button>
+				</form>
+				<form method="post" action="/vote">
+					<input type="hidden" name="request_id" value="<%= request.id %>">
+					<input type="hidden" name="action" value="minus">
+					<button type="submit">-</button>
+				</form>
+			</div>
 		</aside>
-		<h1><a href="/r/<%= request.id %>"><%= request.title %></a></h1>
-		<footer>Created <time datetime="<%= request.date %>"><%= request.dateRelative %></time> by <a href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
-		<a href="/r/<%= request.id %>">
-			<% if (request.comments.length > 0) { %><%= request.comments.length %><% } %>
+		<div>
+			<h1><a href="/r/<%= request.id %>"><%= request.title %></a></h1>
+			<footer>Created <time datetime="<%= request.date %>"><%= request.dateRelative %></time> by <a href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
+		</div>
+		<% if (request.comments.length > 0) { %>
+		<a class="comments-link" href="/r/<%= request.id %>">
+			<%= request.comments.length %>
 		</a>
+		<% } %>
 	</article>
 	<% }) %>
 </section>

@@ -15,10 +15,48 @@ html, body {
 }
 
 body {
-	background-color: #333333;
+	background-color: #333;
 	color: white;
 }
 
 img {
 	max-width: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+.top-rated {
+	max-width: 62.5em;
+	margin: 2em auto;
+}
+
+.top-rated article {
+	border-bottom: 1px solid #666;
+	position: relative;
+	padding: 1em 0;
+}
+
+.top-rated article:first-of-type {
+	border-top: 1px solid #666;
+}
+
+.comments-link {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 0.875em;
+	color: #666;
+}
+
+.comments-link::after {
+	content: '';
+	display: inline-block;
+	vertical-align: -32%;
+	margin-left: 0.5em;
+	background-image: url('/speech-bubble.svg');
+	width: 20px;
+	height: 20px;
 }
