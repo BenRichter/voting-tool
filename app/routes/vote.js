@@ -14,7 +14,8 @@ const vote = (req, res) => {
   directus
     .getItems('votes', {
       'in[request_id]': id,
-      'in[username]': username
+      'in[username]': username,
+      'in[active]': 1
     })
     .then(({data}) => {
       // If data exists, update the record accordingly
@@ -39,7 +40,8 @@ const vote = (req, res) => {
       const newVote = {
         value: action === 'plus' ? 1 : -1,
         request_id: id,
-        username
+        username,
+        active: 1
       };
 
       return directus.createItem('votes', newVote);

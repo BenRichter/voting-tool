@@ -37,7 +37,7 @@ const parseRequestData = (request, username) => {
   const date = parseDate(request.date);
   const dateRelative = dateToRelative(date);
 
-  const votes = request.votes.data;
+  const votes = request.votes.data.filter(vote => vote.active === 1);
   const upvotes = votes.filter(vote => vote.value === 1);
   const downvotes = votes.filter(vote => vote.value === -1);
 
@@ -58,6 +58,7 @@ const parseRequestData = (request, username) => {
   const userVoted = userVotes[username] || false;
 
   const comments = request.comments.data
+    .filter(comment => comment.active === 1)
     .map(comment => {
       const editAllowed = (comment.username === username);
 
@@ -102,4 +103,12 @@ const parseRequestData = (request, username) => {
   return result;
 }
 
-module.exports = {parseDate, dateToString, parseRequestData};
+/**
+ * Express middleware which redirects to the homepage if the user isn't logged in
+ */
+const noAuthNoPlay = (req, res, next) => {
+  if (!req.user) return res.redirect('/');
+  return next();
+};
+
+module.exports = {parseDate, dateToString, parseRequestData, noAuthNoPlay};

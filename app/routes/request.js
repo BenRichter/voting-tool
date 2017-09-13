@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const {parseDate, dateToString, parseRequestData} = require('../utils');
+const {parseDate, dateToString, parseRequestData, noAuthNoPlay} = require('../utils');
 const directus = require('../directus');
 const comment = require('./comment');
 
@@ -55,6 +55,37 @@ const updateRequest = (req, res) => {
     })
 };
 
+const newRequest = (req, res) => {
+  const username = req.user;
+
+  const request = {
+    username,
+    title: req.body.title,
+    date: dateToString(new Date()),
+    active: 1
+  };
+
+  const comment = {
+    username,
+    content: req.body.content,
+    date: dateToString(new Date()),
+    active: 1
+  };
+
+  Promise
+    .all([
+      directus.createItem('requests', request),
+      directus.createItem('comments', comment)
+    ])
+    .then(() => res.redirect('/'))
+    .catch(err => {
+      console.error(err);
+      return res.status(500).end();
+    });
+};
+
 module.exports = router
+  .get('/new', (req, res) => res.redirect('/'))
   .get('/:id', renderRequest)
-  .post('/:id', updateRequest);
+  .post('/new', noAuthNoPlay, newRequest)
+  .post('/:id', noAuthNoPlay, updateRequest);
