@@ -28,6 +28,7 @@ express()
   .set('x-powered-by', false)
   .use(compression())
   .use(bodyParser.urlencoded({extended: false}))
+  .use(express.static(path.join(__dirname, 'public'), {maxage: '31d'}))
   .use(session({
     saveUninitialized: true,
     resave: false,
