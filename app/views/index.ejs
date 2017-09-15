@@ -41,11 +41,14 @@
 	<% }) %>
 </section>
 
-<form method="post" action="/r/new" id="suggest-feature">
-	<label for="title">Title</label>
-	<input id="title" type="text" name="title">
+<div class="modal" id="suggest-feature">
+	<form method="post" action="/r/new">
+		<label for="title">Title</label>
+		<input placeholder="Your request" id="title" type="text" name="title">
 
-	<label for="content">Description</label>
-	<textarea id="content" name="content"></textarea>
-	<button type="submit">Submit new request</button>
-</form>
+		<label for="content">Description</label>
+		<textarea rows="5" id="content" name="content" placeholder="Please explain why this enhancement is the best idea ever"></textarea>
+		<button class="big-blue" type="submit">Submit new request</button>
+	</form>
+</div>
+<div class="overlay-bg"></div>
