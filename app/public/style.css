@@ -11,9 +11,8 @@ html {
 	font-size: 16px;
 }
 
-html, body {
-	height: 100%;
-}
+html,
+body { height: 100%; }
 
 body {
 	background-color: #333;
@@ -21,13 +20,9 @@ body {
 	padding: 0 1em;
 }
 
-img {
-	max-width: 100%;
-}
+img { max-width: 100%; }
 
-a {
-	text-decoration: none;
-}
+a { text-decoration: none; }
 
 button {
 	background-color: transparent;
@@ -74,24 +69,6 @@ footer {
 	margin-top: 5em;
 }
 
-.top-rated article {
-	border-bottom: 1px solid #666;
-	position: relative;
-	padding: 1em 0;
-	display: flex;
-	align-items: center;
-	margin: 0 auto;
-}
-
-.top-rated article aside {
-	display: flex;
-	align-items: stretch;
-}
-
-
-.top-rated article:first-of-type {
-	border-top: 1px solid #666;
-}
 
 .votes-count {
 	font-size: 1.5em;
@@ -105,25 +82,12 @@ footer {
 	border-radius: 50%;
 }
 
-.voted-up .votes-count {
-	box-shadow: 0 0 0 2px #3498db;
-}
-
-.voted-down .votes-count {
-	box-shadow: 0 0 0 2px #e53935;
-}
-
-.vote-up, .vote-down path {
-	fill: #666;
-}
-
-.voted-up .vote-up path {
-	fill: #3498db;
-}
-
-.voted-down .vote-down path {
-	fill: #e53935;
-}
+.voted-up .votes-count { box-shadow: 0 0 0 2px #3498db; }
+.voted-down .votes-count { box-shadow: 0 0 0 2px #e53935; }
+.vote-up,
+.vote-down path { fill: #666; }
+.voted-up .vote-up path { fill: #3498db; }
+.voted-down .vote-down path { fill: #e53935; }
 
 .comments-link {
 	position: absolute;
@@ -144,3 +108,19 @@ footer {
 	width: 1.25em;
 	height: 1.25em;
 }
+
+.top-rated article {
+	border-bottom: 1px solid #666;
+	position: relative;
+	padding: 1em 0;
+	display: flex;
+	align-items: center;
+	margin: 0 auto;
+}
+
+.top-rated article aside {
+	display: flex;
+	align-items: stretch;
+}
+
+.top-rated article:first-of-type { border-top: 1px solid #666; }
