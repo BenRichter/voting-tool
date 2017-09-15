@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const {parseDate, dateToString, parseRequestData, noAuthNoPlay} = require('../utils');
+const {dateToString, parseRequestData, noAuthNoPlay} = require('../utils');
 const directus = require('../directus');
 const comment = require('./comment');
 
@@ -72,12 +72,13 @@ const newRequest = (req, res) => {
     active: 1
   };
 
-  Promise
-    .all([
-      directus.createItem('requests', request),
-      directus.createItem('comments', comment)
-    ])
-    .then(() => res.redirect('/'))
+  directus
+    .createItem('requests', request)
+    .then(({data: request}) => {
+      comment.request_id = request.id;
+
+      return directus.createItem('comments', comment);
+    })
     .catch(err => {
       console.error(err);
       return res.status(500).end();
