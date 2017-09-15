@@ -18,6 +18,8 @@ body {
 	background-color: #333;
 	color: white;
 	padding: 0 1em;
+	max-width: 62.5em;
+	margin: 2em auto;
 }
 
 img { max-width: 100%; }
@@ -29,11 +31,6 @@ button {
 	border: 0;
 	border-radius: 0;
 	padding: 0;
-}
-
-article {
-	max-width: 62.5em;
-	margin: 2em auto;
 }
 
 h1,
