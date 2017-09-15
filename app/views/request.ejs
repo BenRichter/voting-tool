@@ -50,7 +50,9 @@
 					<button type="submit">Save</button>
 				</form>
 			<% } else { %>
+				<div>
 				<%- comment.contentParsed %>
+				</div>
 			<% } %>
 			</main>
 			<footer>
@@ -62,10 +64,12 @@
 			</footer>
 		</article>
 		<% }) %>
+		<% if (!editMode) { %>
 		<form method="post" action="/comment">
 			<input type="hidden" name="request_id" value="<%= request.id %>">
 			<textarea name="content"></textarea>
 			<button type="submit">Post</button>
 		</form>
+		<% } %>
 	</section>
 </article>

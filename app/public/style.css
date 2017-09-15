@@ -167,8 +167,24 @@ footer {
 	border-radius: 2px;
 	padding: 1em;
 	line-height: 140%;
+	position: relative;
+}
+
+.comments article main > div {
 	overflow-x: scroll;
 	-webkit-overflow-scrolling: touch;
+}
+
+.comments article main::before {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 10px 10px 10px 0;
+	border-color: transparent #222222 transparent transparent;
+	left: -10px;
 }
 
 .comments article footer {
