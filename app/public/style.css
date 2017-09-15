@@ -105,6 +105,10 @@ footer {
 	border-radius: 50%;
 }
 
+.negative .votes-count {
+	color: #e53935;
+}
+
 .voted-up .votes-count { box-shadow: 0 0 0 2px #3498db; }
 .voted-down .votes-count { box-shadow: 0 0 0 2px #e53935; }
 .vote-up,
@@ -184,6 +188,13 @@ footer {
 	transition: 200ms cubic-bezier(0, 0, 0.2, 1);
 	transform: scaleX(1);
 }
+
+.top-rated .negative h2,
+.top-rated .negative footer {
+	color: #666;
+}
+
+.top-rated .negative h2::after { background-color: #666; }
 
 .top-rated article > div { overflow: hidden; }
 .top-rated article:first-of-type { border-top: 1px solid #666; }

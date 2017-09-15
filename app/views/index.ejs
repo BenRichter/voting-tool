@@ -8,7 +8,7 @@
 
 <section class="top-rated">
 	<% locals.requests.forEach(request => { %>
-	<article class="<% if (request.userVoted === 1) { %>voted-up<% } %><% if (request.userVoted === -1) { %>voted-down<% } %>">
+	<article class="<% if (request.score < 0) { %>negative <% } %><% if (request.userVoted === 1) { %>voted-up<% } %><% if (request.userVoted === -1) { %>voted-down<% } %>">
 		<aside>
 			<p class="votes-count"><%= request.score %></p>
 			<div class="vote-buttons">
