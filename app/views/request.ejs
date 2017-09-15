@@ -1,34 +1,40 @@
 <%- include('partials/head.ejs'); %>
-<a href="/">Back to Listing</a>
+<a href="/"><svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M16 7H3.83l5.59-5.59L8 0 0 8l8 8 1.41-1.41L3.83 9H16" fill-rule="nonzero" fill="#FFF"/></svg> Back to Listing</a>
 <article class="single <% if (request.userVoted === 1) { %>voted-up<% } %><% if (request.userVoted === -1) { %>voted-down<% } %>">
-	<aside>
-		<p class="votes-count"><%= request.score %></p>
-		<form method="post" action="/vote">
-			<input type="hidden" name="request_id" value="<%= request.id %>">
-			<input type="hidden" name="action" value="plus">
-			<button class="vote-up" type="submit">
-				<svg width="22" height="20" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 20h4V8H0v12zM22 9c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13.17 0 6.59 6.59C6.22 6.95 6 7.45 6 8v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9.09l-.01-.01L22 9z" fill-rule="nonzero" /></svg>
-			</button>
-		</form>
-		<form method="post" action="/vote">
-			<input type="hidden" name="request_id" value="<%= request.id %>">
-			<input type="hidden" name="action" value="minus">
-			<button class="vote-down" type="submit">
-				<svg width="22" height="20" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg"><path d="M14 0H5c-.83 0-1.54.5-1.84 1.22L.14 8.27C.05 8.5 0 8.74 0 9v1.91l.01.01L0 11c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L8.83 20l6.59-6.59c.36-.36.58-.86.58-1.41V2c0-1.1-.9-2-2-2zm4 0v12h4V0h-4z" fill-rule="nonzero" /></svg>
-			</button>
-		</form>
-	</aside>
-	<% if (editMode && request.editAllowed) { %>
-	<form method="post" action="/r/<%= request.id %>">
-		<label for="title">Title</label>
-		<input type="text" id="title" name="title" value="<%= request.title %>">
-		<button type="submit">Save</button>
-	</form>
-	<% } else { %>
-		<h1><%= request.title %></h1>
-		<% if (request.editAllowed) { %><a href="?edit=1">edit</a><% } %>
-	<% } %>
-	<footer>Created <time datetime="<%= request.date %>"><%= request.dateRelative %></time> by <a href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
+	<div class="single-title">
+		<aside>
+			<p class="votes-count"><%= request.score %></p>
+			<div class="vote-buttons">
+				<form method="post" action="/vote">
+					<input type="hidden" name="request_id" value="<%= request.id %>">
+					<input type="hidden" name="action" value="plus">
+					<button class="vote-up" type="submit">
+						<svg width="22" height="20" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 20h4V8H0v12zM22 9c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13.17 0 6.59 6.59C6.22 6.95 6 7.45 6 8v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9.09l-.01-.01L22 9z" fill-rule="nonzero" /></svg>
+					</button>
+				</form>
+				<form method="post" action="/vote">
+					<input type="hidden" name="request_id" value="<%= request.id %>">
+					<input type="hidden" name="action" value="minus">
+					<button class="vote-down" type="submit">
+						<svg width="22" height="20" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg"><path d="M14 0H5c-.83 0-1.54.5-1.84 1.22L.14 8.27C.05 8.5 0 8.74 0 9v1.91l.01.01L0 11c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L8.83 20l6.59-6.59c.36-.36.58-.86.58-1.41V2c0-1.1-.9-2-2-2zm4 0v12h4V0h-4z" fill-rule="nonzero" /></svg>
+					</button>
+				</form>
+			</div>
+		</aside>
+		<div>
+			<% if (editMode && request.editAllowed) { %>
+			<form method="post" action="/r/<%= request.id %>">
+				<label for="title">Title</label>
+				<input type="text" id="title" name="title" value="<%= request.title %>">
+				<button type="submit">Save</button>
+			</form>
+			<% } else { %>
+				<h1><%= request.title %></h1>
+				<% if (request.editAllowed) { %><a href="?edit=1">edit</a><% } %>
+			<% } %>
+			<footer>Created <time datetime="<%= request.date %>"><%= request.dateRelative %></time> by <a href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
+		</div>
+	</div>
 	<section class="comments">
 		<% request.comments.forEach(comment => { %>
 		<article>

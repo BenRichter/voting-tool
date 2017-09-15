@@ -66,7 +66,6 @@ footer {
 	margin-top: 5em;
 }
 
-
 .votes-count {
 	font-size: 1.5em;
 	font-weight: 300;
@@ -106,13 +105,23 @@ footer {
 	height: 1.25em;
 }
 
-.top-rated article {
+.top-rated article,
+.single-title {
 	border-bottom: 1px solid #666;
 	position: relative;
 	padding: 1em 0;
 	display: flex;
 	align-items: center;
 	margin: 0 auto;
+}
+
+.top-rated article aside,
+.single-title aside {
+	display: flex;
+	align-items: stretch;
+}
+
+.top-rated article {
 	padding-right: 3em;
 }
 
@@ -122,10 +131,6 @@ footer {
 	text-overflow: ellipsis;
 }
 
-.top-rated article aside {
-	display: flex;
-	align-items: stretch;
-}
 
 .top-rated article > div {
 	overflow: hidden;
