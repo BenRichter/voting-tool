@@ -37,9 +37,6 @@ h1,
 h2 {
 	font-size: 1.4rem;
 	font-weight: 300;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 footer {
@@ -117,6 +114,12 @@ footer {
 	align-items: center;
 	margin: 0 auto;
 	padding-right: 3em;
+}
+
+.top-rated h2 {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .top-rated article aside {
