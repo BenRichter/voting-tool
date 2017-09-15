@@ -24,7 +24,9 @@ body {
 
 img { max-width: 100%; }
 
-a { text-decoration: none; }
+a {
+	text-decoration: none;
+}
 
 button {
 	background-color: transparent;
@@ -42,7 +44,7 @@ h2 {
 footer {
 	font-size: 0.875em;
 	color: #999;
-	margin-top: 0.125em;
+	margin-top: 0.25em;
 }
 
 .big-blue {
@@ -121,9 +123,7 @@ footer {
 	align-items: stretch;
 }
 
-.top-rated article {
-	padding-right: 3em;
-}
+.top-rated article { padding-right: 3em; }
 
 .top-rated h2 {
 	white-space: nowrap;
@@ -131,9 +131,65 @@ footer {
 	text-overflow: ellipsis;
 }
 
+.top-rated article > div { overflow: hidden; }
+.top-rated article:first-of-type { border-top: 1px solid #666; }
 
-.top-rated article > div {
-	overflow: hidden;
+
+/* ==========================================================================
+ * Comments
+ * ========================================================================== */
+.comments {
+	margin-top: 2em;
 }
 
-.top-rated article:first-of-type { border-top: 1px solid #666; }
+.comments article {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 2em;
+}
+
+.comments article aside {
+	flex-basis: 3.75em;
+	flex-shrink: 0;
+}
+
+.comments article aside img {
+	width: 3.75em;
+	height: 3.75em;
+	border-radius: 50%;
+}
+
+.comments article main {
+	flex-basis: 10em;
+	flex-grow: 1;
+	background-color: #222;
+	margin-left: 1em;
+	border-radius: 2px;
+	padding: 1em;
+	line-height: 140%;
+	overflow-x: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+
+.comments article footer {
+	flex-basis: 100%;
+	text-align: right;
+	font-style: italic;
+}
+
+/* Comment content markup
+ * ========================================================================== */
+.comments article a {
+	color: #3498db;
+}
+
+.comments article pre,
+.comments article code {
+	font-family: monospace;
+	white-space: pre;
+}
+
+.comments article p {
+	margin-bottom: 1em;
+}
+
