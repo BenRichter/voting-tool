@@ -64,8 +64,10 @@ footer a {
 	transition: 200ms cubic-bezier(0.4, 0, 0, 1);
 }
 
+footer a:focus,
 footer a:hover {
 	color: white;
+	outline: 0;
 	text-decoration-color: white;
 }
 
@@ -99,6 +101,8 @@ a.back svg {
 	margin-right: 0.5em;
 }
 
+a.back:focus { outline: 0; }
+
 a.back::after {
 	content: '';
 	display: block;
@@ -112,6 +116,7 @@ a.back::after {
 	transition: 200ms cubic-bezier(0.4, 0, 1, 1);
 }
 
+a.back:focus::after,
 a.back:hover::after {
 	transition: 200ms cubic-bezier(0, 0, 0.2, 1);
 	transform: scaleX(1);
@@ -388,6 +393,9 @@ a.back:hover::after {
 	transition: 200ms cubic-bezier(0.4, 0, 0, 1);
 }
 
+.write-comment button:focus { outline: 0; }
+
+.write-comment button:focus path:first-of-type,
 .write-comment button:hover path:first-of-type {
 	fill: #fff;
 }
@@ -436,10 +444,13 @@ a.back:hover::after {
 	transition: 200ms cubic-bezier(0.4, 0, 0, 1);
 }
 
+.single-title > div button:focus,
 .single-title > div button:hover {
 	background-color: #3498db;
+	outline: 0;
 }
 
+.single-title > div button:focus path,
 .single-title > div button:hover path {
 	fill: white;
 }
