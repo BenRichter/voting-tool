@@ -1,12 +1,14 @@
 (function() {
-  var newCommentTextarea = document.querySelector('.new-comment textarea');
+  var commentTextarea = document.querySelector('.write-comment textarea');
 
-  if (newCommentTextarea) {
+  if (commentTextarea) {
     function onInput() {
       this.style.height = 'auto';
       this.style.height = (this.scrollHeight) + 'px';
     }
 
-    newCommentTextarea.addEventListener('input', onInput, false);
+    commentTextarea.addEventListener('input', onInput, false);
+
+    onInput.call(commentTextarea);
   }
 }())

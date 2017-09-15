@@ -1,5 +1,5 @@
 <%- include('partials/head.ejs'); %>
-<a href="/"><svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M16 7H3.83l5.59-5.59L8 0 0 8l8 8 1.41-1.41L3.83 9H16" fill-rule="nonzero" fill="#FFF"/></svg> Back to Listing</a>
+<a class="back" href="/"><svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M16 7H3.83l5.59-5.59L8 0 0 8l8 8 1.41-1.41L3.83 9H16" fill-rule="nonzero" fill="#FFF"/></svg> Back to Listing</a>
 <article class="single <% if (request.score < 0) { %>negative <% } %><% if (request.userVoted === 1) { %>voted-up<% } %><% if (request.userVoted === -1) { %>voted-down<% } %>">
 	<div class="single-title">
 		<aside>
@@ -43,11 +43,13 @@
 			</aside>
 			<main>
 			<% if (editMode && comment.editAllowed) { %>
-				<form method="post" action="/comment">
+				<form method="post" action="/comment" class="write-comment">
 					<input type="hidden" name="comment_id" value="<%= comment.id %>">
 					<input type="hidden" name="request_id" value="<%= request.id %>">
 					<textarea name="content"><%= comment.content %></textarea>
-					<button type="submit">Save</button>
+					<button type="submit">
+						<svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="white"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+					</button>
 				</form>
 			<% } else { %>
 				<div>
@@ -70,7 +72,7 @@
 				<img src="https://github.com/<%= username %>.png?size=60" alt="<%= username %>">
 			</aside>
 			<main>
-				<form method="post" action="/comment" class="new-comment">
+				<form method="post" action="/comment" class="write-comment">
 					<input type="hidden" name="request_id" value="<%= request.id %>">
 					<textarea rows="1" placeholder="Add a comment here..." name="content"></textarea>
 					<button type="submit">
