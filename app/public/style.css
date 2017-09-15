@@ -27,6 +27,13 @@ a {
 	text-decoration: none;
 }
 
+button {
+	appearance: none;
+	background-color: transparent;
+	border: 0;
+	border-radius: 0;
+}
+
 .big-blue {
 	display: inline-block;
 	background-color: #3498db;
@@ -34,6 +41,10 @@ a {
 	text-transform: uppercase;
 	border-radius: 4px;
 	padding: 1em 1.5em;
+}
+
+.vote-buttons {
+	margin: 0 0.5em;
 }
 
 .top-rated {
@@ -45,7 +56,15 @@ a {
 	border-bottom: 1px solid #666;
 	position: relative;
 	padding: 1em 0;
+	display: flex;
+	align-items: center;
 }
+
+.top-rated article aside {
+	display: flex;
+	align-items: center;
+}
+
 
 .top-rated article:first-of-type {
 	border-top: 1px solid #666;
