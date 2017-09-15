@@ -27,6 +27,15 @@ a {
 	text-decoration: none;
 }
 
+.big-blue {
+	display: inline-block;
+	background-color: #3498db;
+	font-size: 0.875em;
+	text-transform: uppercase;
+	border-radius: 4px;
+	padding: 1em 1.5em;
+}
+
 .top-rated {
 	max-width: 62.5em;
 	margin: 2em auto;
