@@ -29,7 +29,7 @@
 			</div>
 		</aside>
 		<div>
-			<h2><a href="/r/<%= request.id %>"><%= request.title %></a></h2>
+			<a href="/r/<%= request.id %>"><h2><%= request.title %></h2></a>
 			<footer>Created <time datetime="<%= request.date %>"><%= request.dateRelative %></time> by <a href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
 		</div>
 		<% if (request.comments.length > 0) { %>
