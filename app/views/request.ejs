@@ -1,7 +1,7 @@
 <%- include('partials/head.ejs'); %>
 <a href="/">Back to Listing</a>
-<article>
-	<aside class="<% if (request.userVoted === 1) { %>voted-up<% } %><% if (request.userVoted === -1) { %>voted-down<% } %>">
+<article class="single <% if (request.userVoted === 1) { %>voted-up<% } %><% if (request.userVoted === -1) { %>voted-down<% } %>">
+	<aside>
 		<p class="votes-count"><%= request.score %></p>
 		<form method="post" action="/vote">
 			<input type="hidden" name="request_id" value="<%= request.id %>">
@@ -29,7 +29,7 @@
 		<% if (request.editAllowed) { %><a href="?edit=1">edit</a><% } %>
 	<% } %>
 	<footer>Created <time datetime="<%= request.date %>"><%= request.dateRelative %></time> by <a href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
-	<section>
+	<section class="comments">
 		<% request.comments.forEach(comment => { %>
 		<article>
 			<aside>
