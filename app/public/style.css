@@ -25,7 +25,8 @@ body {
 img { max-width: 100%; }
 
 a {
-	text-decoration: none;
+	text-decoration-skip: ink;
+	text-decoration-color: #666;
 }
 
 button,
@@ -98,6 +99,7 @@ footer {
 	transform: translateY(-50%);
 	font-size: 0.875em;
 	color: #666;
+	text-decoration: none;
 }
 
 .comments-link::after {
@@ -110,6 +112,8 @@ footer {
 	width: 1.25em;
 	height: 1.25em;
 }
+
+.top-rated div > a { text-decoration: none; }
 
 .top-rated article,
 .single-title {
@@ -133,6 +137,25 @@ footer {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	position: relative;
+	width: max-content;
+}
+
+.top-rated h2::after {
+	content: '';
+	width: 100%;
+	position: absolute;
+	bottom: 2px;
+	left: 0;
+	background-color: white;
+	height: 1px;
+	transform: scaleX(0);
+	transition: 200ms cubic-bezier(0.4, 0, 1, 1);
+}
+
+.top-rated a:hover h2::after {
+	transition: 200ms cubic-bezier(0, 0, 0.2, 1);
+	transform: scaleX(1);
 }
 
 .top-rated article > div { overflow: hidden; }
@@ -152,18 +175,18 @@ footer {
 	margin-bottom: 2em;
 }
 
-.comments article aside {
+.comments aside {
 	flex-basis: 3.75em;
 	flex-shrink: 0;
 }
 
-.comments article aside img {
+.comments aside img {
 	width: 3.75em;
 	height: 3.75em;
 	border-radius: 50%;
 }
 
-.comments article main {
+.comments main {
 	flex-basis: 10em;
 	flex-grow: 1;
 	background-color: #222;
@@ -174,12 +197,60 @@ footer {
 	position: relative;
 }
 
-.comments article main > div {
+.comments main > div {
+	max-width: 38.5em;
 	overflow-x: scroll;
 	-webkit-overflow-scrolling: touch;
 }
 
-.comments article main::before {
+.comments footer {
+	flex-basis: 100%;
+	text-align: right;
+	font-style: italic;
+	color: #666;
+}
+
+/* Comment content markup
+ * ========================================================================== */
+.comments main h1 {
+	font-size: 1.75em;
+}
+
+.comments main h2 {
+	font-size: 1.5em;
+}
+
+.comments main h3 {
+	font-size: 1.2em;
+	font-weight: 300;
+}
+
+.comments main h4 {
+	font-weight: 300;
+}
+
+.comments main h1,
+.comments main h2,
+.comments main h3,
+.comments main h4 {
+	margin-bottom: 1em;
+}
+
+.comments main a {
+	color: #3498db;
+}
+
+.comments main pre,
+.comments main code {
+	font-family: monospace;
+	white-space: pre;
+}
+
+.comments main p {
+	margin-bottom: 1em;
+}
+
+.comments main::before {
 	content: '';
 	display: block;
 	position: absolute;
@@ -192,27 +263,6 @@ footer {
 	top: 20px;
 }
 
-.comments article footer {
-	flex-basis: 100%;
-	text-align: right;
-	font-style: italic;
-}
-
-/* Comment content markup
- * ========================================================================== */
-.comments article a {
-	color: #3498db;
-}
-
-.comments article pre,
-.comments article code {
-	font-family: monospace;
-	white-space: pre;
-}
-
-.comments article p {
-	margin-bottom: 1em;
-}
 
 /* New Comment
  * ========================================================================== */
