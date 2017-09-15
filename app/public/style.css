@@ -10,13 +10,13 @@ html {
 }
 
 html, body {
-	padding: 0;
 	height: 100%;
 }
 
 body {
 	background-color: #333;
 	color: white;
+	padding: 0 1em;
 }
 
 img {
@@ -57,6 +57,7 @@ a {
 	vertical-align: -32%;
 	margin-left: 0.5em;
 	background-image: url('/speech-bubble.svg');
-	width: 20px;
-	height: 20px;
+	background-size: cover;
+	width: 1.25em;
+	height: 1.25em;
 }
