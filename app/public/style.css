@@ -63,6 +63,26 @@ a {
 	border-radius: 50%;
 }
 
+.voted-up .votes-count {
+	box-shadow: 0 0 0 2px #3498db;
+}
+
+.voted-down .votes-count {
+	box-shadow: 0 0 0 2px #e53935;
+}
+
+.vote-up, .vote-down path {
+	fill: #666;
+}
+
+.voted-up .vote-up path {
+	fill: #3498db;
+}
+
+.voted-down .vote-down path {
+	fill: #e53935;
+}
+
 .comments-link {
 	position: absolute;
 	right: 0;
