@@ -33,4 +33,12 @@
   }
 
   window.addEventListener('mousedown', handleMouseDownOnce);
+
+
+  // Hide the new request modal on click outside
+  function closeModal() {
+    window.location.hash = '';
+  }
+
+  document.querySelector('.overlay-bg').addEventListener('click', closeModal);
 }())
