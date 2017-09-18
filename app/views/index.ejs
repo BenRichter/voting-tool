@@ -1,20 +1,19 @@
 <%- include('partials/head.ejs'); %>
 
-<div class="links">
-	<% if (!locals.loggedIn) { %>
-	<a href="/auth" class="big green">Login with GitHub</a>
-	<% } %>
-
-	<% if (locals.loggedIn) { %>
-	<a href="/logout">
-		<%= locals.username %>
-		<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10.072 4.8L8 6.872 5.928 4.8 4.8 5.928 6.872 8 4.8 10.072 5.928 11.2 8 9.128l2.072 2.072 1.128-1.128L9.128 8 11.2 5.928 10.072 4.8zM8 0C3.576 0 0 3.576 0 8c0 4.424 3.576 8 8 8 4.424 0 8-3.576 8-8 0-4.424-3.576-8-8-8zm0 14.4c-3.528 0-6.4-2.872-6.4-6.4 0-3.528 2.872-6.4 6.4-6.4 3.528 0 6.4 2.872 6.4 6.4 0 3.528-2.872 6.4-6.4 6.4z" fill-rule="nonzero" fill="#666"/></svg>
-	</a>
-	<a href="#suggest-feature" class="big blue">Suggest a Feature</a>
-	<% } %>
-</div>
-
 <section class="top-rated">
+	<div class="links">
+		<% if (!locals.loggedIn) { %>
+		<a href="/auth" class="big green">Login with GitHub</a>
+		<% } %>
+
+		<% if (locals.loggedIn) { %>
+		<a href="/logout">
+			<%= locals.username %>
+			<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10.072 4.8L8 6.872 5.928 4.8 4.8 5.928 6.872 8 4.8 10.072 5.928 11.2 8 9.128l2.072 2.072 1.128-1.128L9.128 8 11.2 5.928 10.072 4.8zM8 0C3.576 0 0 3.576 0 8c0 4.424 3.576 8 8 8 4.424 0 8-3.576 8-8 0-4.424-3.576-8-8-8zm0 14.4c-3.528 0-6.4-2.872-6.4-6.4 0-3.528 2.872-6.4 6.4-6.4 3.528 0 6.4 2.872 6.4 6.4 0 3.528-2.872 6.4-6.4 6.4z" fill-rule="nonzero" fill="#666"/></svg>
+		</a>
+		<a href="#suggest-feature" class="big blue">Suggest a Feature</a>
+		<% } %>
+	</div>
 	<form class="sorting-options">
 		<fieldset>
 			<div>

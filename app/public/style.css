@@ -239,7 +239,6 @@ a.back:hover::after {
 .sorting-options {
 	display: flex;
 	align-items: center;
-	padding: 1em 0;
 }
 
 .sorting-options fieldset {
@@ -295,6 +294,7 @@ a.back:hover::after {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+	float: right;
 }
 
 .links .big {
@@ -302,6 +302,9 @@ a.back:hover::after {
 }
 
 .top-rated { margin-top: 2em; }
+
+.top-rated article:first-of-type { margin-top: 2em; }
+.top-rated article:last-of-type { margin-bottom: 2em; }
 
 .top-rated article,
 .single-title {
