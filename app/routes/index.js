@@ -12,17 +12,27 @@ const renderHomepage = (req, res) => {
   const username = req.user;
   const loggedIn = username && username.length > 0;
 
+  let { status, sort } = req.query;
+  status = status || 'open';
+  sort = sort || 'votes';
+
   directus
     .getItems('requests', {
       depth: 1,
-      status: 1
+      status: 1,
+      'in[closed]': status === 'closed' ? 1 : 0
     })
     .then(({ data }) => data.filter(request => request.active === 1))
     .then(requests =>
       requests.map(request => parseRequestData(request, username))
     )
-    .then(requests => requests.sort((a, b) => (a.score < b.score ? 1 : -1)))
-    .then(requests => res.render('index', { loggedIn, requests, username }))
+    .then(requests => {
+      if (sort === 'newest') {
+        return requests.sort((a, b) => (a.date < b.date ? 1 : -1));
+      }
+      return requests.sort((a, b) => (a.score < b.score ? 1 : -1));
+    })
+    .then(requests => res.render('index', { sort, status, loggedIn, requests, username }))
     .catch(err => {
       console.error(err);
       res.status(500).end();
