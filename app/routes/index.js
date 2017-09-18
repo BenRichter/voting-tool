@@ -22,7 +22,7 @@ const renderHomepage = (req, res) => {
       requests.map(request => parseRequestData(request, username))
     )
     .then(requests => requests.sort((a, b) => (a.score < b.score ? 1 : -1)))
-    .then(requests => res.render('index', { loggedIn, requests }))
+    .then(requests => res.render('index', { loggedIn, requests, username }))
     .catch(err => {
       console.error(err);
       res.status(500).end();
@@ -34,4 +34,4 @@ module.exports = router
   .use('/vote', vote)
   .get('/', renderHomepage)
   .use('/comment', comment)
-  .use('/r/', request);
+  .use('/r', request);

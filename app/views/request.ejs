@@ -4,6 +4,7 @@
 	<div class="single-title">
 		<aside>
 			<p class="votes-count"><%= request.score %></p>
+			<% if (locals.username) { %>
 			<div class="vote-buttons">
 				<form method="post" action="/vote">
 					<input type="hidden" name="request_id" value="<%= request.id %>">
@@ -20,6 +21,7 @@
 					</button>
 				</form>
 			</div>
+			<% } %>
 		</aside>
 		<div>
 			<% if (editMode && request.editAllowed) { %>

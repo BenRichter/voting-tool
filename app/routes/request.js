@@ -8,9 +8,6 @@ const renderRequest = (req, res) => {
   const id = req.params.id;
   const username = req.user;
 
-  // Redirect back home if user isn't logged in
-  if (!username) return res.redirect('/');
-
   // Set editMode flag when the query param `edit` is set to a truthy value
   const editMode = Boolean(req.query.edit) || false;
 
