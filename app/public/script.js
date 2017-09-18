@@ -1,4 +1,5 @@
 (function() {
+  // Change height of textinput in new comment input based on value
   var commentTextarea = document.querySelector('.write-comment textarea');
 
   if (commentTextarea) {
@@ -11,4 +12,5 @@
 
     onInput.call(commentTextarea);
   }
+
 }())
