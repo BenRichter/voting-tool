@@ -460,10 +460,9 @@ a.back:hover::after {
 .comments main a { color: #3498db; }
 
 .comments main pre,
-.comments main code {
-	font-family: monospace;
-	white-space: pre;
-}
+.comments main code { font-family: monospace; }
+
+.comments main pre { white-space: pre; }
 
 .comments main p { margin-bottom: 1em; }
 
