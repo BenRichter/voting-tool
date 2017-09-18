@@ -51,6 +51,7 @@
 	<% }) %>
 </section>
 
+<% if (locals.loggedIn) { %>
 <div class="modal" id="suggest-feature">
 	<form method="post" action="/r/new">
 		<label for="title">Title</label>
@@ -62,3 +63,4 @@
 	</form>
 </div>
 <div class="overlay-bg"></div>
+<% } %>
