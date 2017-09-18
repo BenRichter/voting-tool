@@ -36,9 +36,24 @@
 
 
   // Hide the new request modal on click outside
-  function closeModal() {
-    window.location.hash = '';
+  var overlayBg = document.querySelector('.overlay-bg');
+
+  if (overlayBg) {
+    function closeModal() {
+      window.location.hash = '';
+    }
+
+    overlayBg.addEventListener('click', closeModal);
   }
 
-  document.querySelector('.overlay-bg').addEventListener('click', closeModal);
+
+  // Submit search form on change
+  var sortForm = document.querySelector('.sorting-options');
+
+  if (sortForm) {
+    sortForm.querySelector('button').remove();
+    sortForm.addEventListener('change', function () {
+      return this.submit();
+    });
+  }
 }())
