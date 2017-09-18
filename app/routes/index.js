@@ -29,9 +29,15 @@ const renderHomepage = (req, res) => {
     });
 };
 
+const logout = (req, res) => {
+  req.logout();
+  return res.redirect('/');
+};
+
 module.exports = router
   .use('/auth', auth)
   .use('/vote', vote)
   .get('/', renderHomepage)
+  .get('/logout', logout)
   .use('/comment', comment)
   .use('/r', request);
