@@ -332,14 +332,21 @@ a.back:hover::after {
 @media screen and (min-width: 54em) {
 	.links,
 	.links a { margin: 0; }
-	.links { float: right; }
+	.links {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
 }
 
 .links .big {
 	margin-left: 1em;
 }
 
-.top-rated { margin-top: 2em; }
+.top-rated {
+	margin-top: 2em;
+	position: relative;
+}
 
 .top-rated article:first-of-type { margin-top: 2em; }
 .top-rated article:last-of-type { margin-bottom: 2em; }
