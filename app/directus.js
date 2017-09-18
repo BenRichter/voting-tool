@@ -24,12 +24,12 @@ client.findAndDeleteItem = async function(tableName, params = {}, data = {}) {
     limit: 1
   });
 
-  const {data: userProfiles} = await this.getItems(tableName, params);
+  const { data: userProfiles } = await this.getItems(tableName, params);
 
   const id = userProfiles[0].id;
 
   return this.deleteItem(tableName, id);
-}
+};
 
 /**
  * Convenience function which will check if an item exists based on the params
@@ -41,7 +41,6 @@ client.findAndDeleteItem = async function(tableName, params = {}, data = {}) {
  */
 client.getOrCreateItem = function(tableName, params = {}, data = {}) {
   return new Promise(async (resolve, reject) => {
-
     // Limit the amount of returned objects from the API to 1,
     //   since we're only looking if a specific one exists
     params = Object.assign({}, params, {
@@ -49,7 +48,7 @@ client.getOrCreateItem = function(tableName, params = {}, data = {}) {
     });
 
     // Fetch the item from Directus
-    const {data: result} = await this.getItems(tableName, params);
+    const { data: result } = await this.getItems(tableName, params);
 
     // If the requested item has been found, resolve the promise
     if (Array.isArray(result) && result.length > 0) {

@@ -17,7 +17,7 @@ const vote = (req, res) => {
       'in[username]': username,
       'in[active]': 1
     })
-    .then(({data}) => {
+    .then(({ data }) => {
       // If data exists, update the record accordingly
       if (data.length > 0) {
         const vote = data[0];
@@ -32,8 +32,7 @@ const vote = (req, res) => {
           dataToUpdate.value = 0;
         }
 
-        return directus
-          .updateItem('votes', voteID, dataToUpdate);
+        return directus.updateItem('votes', voteID, dataToUpdate);
       }
 
       // If not, create record
@@ -53,5 +52,4 @@ const vote = (req, res) => {
     });
 };
 
-module.exports = router
-  .post('/', vote);
+module.exports = router.post('/', vote);

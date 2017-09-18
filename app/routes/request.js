@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const {dateToString, parseRequestData, noAuthNoPlay} = require('../utils');
+const { dateToString, parseRequestData, noAuthNoPlay } = require('../utils');
 const directus = require('../directus');
 const comment = require('./comment');
 
@@ -18,7 +18,7 @@ const renderRequest = (req, res) => {
     .getItem('requests', id)
     .then(response => response.data)
     .then(data => parseRequestData(data, username))
-    .then(request => ({request, editMode, title: request.title, username})) // add editMode key to locals
+    .then(request => ({ request, editMode, title: request.title, username })) // add editMode key to locals
     .then(locals => res.render('request', locals))
     .catch(err => {
       console.error(err);
@@ -34,10 +34,9 @@ const updateRequest = (req, res) => {
   // Get request from DB
   directus
     .getItem('requests', id)
-
     // If current logged in user is the creator of the request, update the
     //   item in Directus. Else, redirect back without doing anything
-    .then(({data}) => {
+    .then(({ data }) => {
       if (data.username === username) {
         return directus.updateItem('requests', id, {
           title: newTitle,
@@ -46,13 +45,12 @@ const updateRequest = (req, res) => {
       }
       return res.redirect('/r/' + id);
     })
-
     // Redirect back to the original post when the update is done
     .then(() => res.redirect('/r/' + id))
     .catch(err => {
       console.error(err);
       return res.status(500).end();
-    })
+    });
 };
 
 const newRequest = (req, res) => {
@@ -74,7 +72,7 @@ const newRequest = (req, res) => {
 
   directus
     .createItem('requests', request)
-    .then(({data: request}) => {
+    .then(({ data: request }) => {
       comment.request_id = request.id;
 
       return directus.createItem('comments', comment);

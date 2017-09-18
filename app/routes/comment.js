@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const {dateToString} = require('../utils');
+const { dateToString } = require('../utils');
 const directus = require('../directus');
 
 const createOrUpdateComment = (req, res) => {
@@ -41,5 +41,4 @@ const createOrUpdateComment = (req, res) => {
   }
 };
 
-module.exports = router
-  .post('/', createOrUpdateComment);
+module.exports = router.post('/', createOrUpdateComment);

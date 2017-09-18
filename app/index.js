@@ -27,15 +27,17 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('x-powered-by', false)
   .use(compression())
-  .use(bodyParser.urlencoded({extended: false}))
-  .use(express.static(path.join(__dirname, 'public'), {maxage: '31d'}))
-  .use(session({
-    saveUninitialized: true,
-    resave: false,
-    secret: process.env.SESSION_SECRET,
-    store: new LevelStore(db)
-  }))
-  .use(express.static(path.join(__dirname, 'public'), {maxage: '31d'}))
+  .use(bodyParser.urlencoded({ extended: false }))
+  .use(express.static(path.join(__dirname, 'public'), { maxage: '31d' }))
+  .use(
+    session({
+      saveUninitialized: true,
+      resave: false,
+      secret: process.env.SESSION_SECRET,
+      store: new LevelStore(db)
+    })
+  )
+  .use(express.static(path.join(__dirname, 'public'), { maxage: '31d' }))
   .use(passport.initialize())
   .use(passport.session())
   .use(router)

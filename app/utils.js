@@ -22,7 +22,9 @@ const parseDate = dateString => {
  * @param  {Date} dateObj
  * @return {String}
  */
-const dateToString = dateObj => `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-${dateObj.getDate()} ${dateObj.getHours()}:${dateObj.getMinutes()}:${dateObj.getSeconds()}`;
+const dateToString = dateObj =>
+  `${dateObj.getFullYear()}-${dateObj.getMonth() +
+    1}-${dateObj.getDate()} ${dateObj.getHours()}:${dateObj.getMinutes()}:${dateObj.getSeconds()}`;
 
 /**
  * Parses a single request down to a usable data object to be rendered
@@ -32,7 +34,7 @@ const dateToString = dateObj => `${dateObj.getFullYear()}-${dateObj.getMonth() +
  * @return {Object}          Single request object parsed
  */
 const parseRequestData = (request, username) => {
-  const editAllowed = (request.username === username);
+  const editAllowed = request.username === username;
 
   const date = parseDate(request.date);
   const dateRelative = dateToRelative(date);
@@ -48,9 +50,9 @@ const parseRequestData = (request, username) => {
 
   // Object {[username]: vote} to later match comments against
   const userVotes = {};
-  votes.forEach(({username, value}) => (userVotes[username] = value));
+  votes.forEach(({ username, value }) => (userVotes[username] = value));
 
-  const getUserVote = (username) => {
+  const getUserVote = username => {
     const value = userVotes[username];
     return value === 1 ? 'voted up' : 'voted down';
   };
@@ -60,14 +62,15 @@ const parseRequestData = (request, username) => {
   const comments = request.comments.data
     .filter(comment => comment.active === 1)
     .map(comment => {
-      const editAllowed = (comment.username === username);
+      const editAllowed = comment.username === username;
 
       const content = comment.content;
       const contentParsed = marked(content);
       const date = parseDate(comment.date);
       const dateRelative = dateToRelative(date);
 
-      const edited = comment.last_updated && comment.last_updated !== comment.date;
+      const edited =
+        comment.last_updated && comment.last_updated !== comment.date;
 
       const userHasVoted = userVotes.hasOwnProperty(comment.username);
       let userVote = userHasVoted ? getUserVote(username) : null;
@@ -82,7 +85,7 @@ const parseRequestData = (request, username) => {
         date,
         dateRelative,
         editAllowed
-      }
+      };
     });
 
   const result = {
@@ -98,10 +101,10 @@ const parseRequestData = (request, username) => {
     downvotesCount,
     score: upvotesCount - downvotesCount,
     comments
-  }
+  };
 
   return result;
-}
+};
 
 /**
  * Express middleware which redirects to the homepage if the user isn't logged in
@@ -111,4 +114,4 @@ const noAuthNoPlay = (req, res, next) => {
   return next();
 };
 
-module.exports = {parseDate, dateToString, parseRequestData, noAuthNoPlay};
+module.exports = { parseDate, dateToString, parseRequestData, noAuthNoPlay };
