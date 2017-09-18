@@ -2,7 +2,8 @@
   "name": "voting-tool",
   "private": true,
   "version": "1.0.0",
-  "description": "A simple tool for accepting community submissions (eg: feature requests) that can be voted into a priority ranking",
+  "description":
+    "A simple tool for accepting community submissions (eg: feature requests) that can be voted into a priority ranking",
   "main": "app/index.js",
   "dependencies": {
     "body-parser": "^1.18.0",
@@ -35,5 +36,15 @@
   "bugs": {
     "url": "https://github.com/directus/voting-tool/issues"
   },
-  "homepage": "https://github.com/directus/voting-tool#readme"
+  "homepage": "https://github.com/directus/voting-tool#readme",
+  "prettier": {
+    "overrides": [
+      {
+        "files": "*.css",
+        "options": {
+          "useTabs": true
+        }
+      }
+    ]
+  }
 }
