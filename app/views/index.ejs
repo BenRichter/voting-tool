@@ -17,18 +17,22 @@
 <section class="top-rated">
 	<form class="sorting-options">
 		<fieldset>
-			<input id="status-open" type="radio" name="status" value="open" <% if (locals.status === 'open') { %>checked<% } %>>
-			<label for="status-open">Open</label>
-			<input id="status-closed" type="radio" name="status" value="closed" <% if (locals.status === 'closed') { %>checked<% } %>>
-			<label for="status-closed">Closed</label>
+			<div>
+				<input id="status-open" type="radio" name="status" value="open" <% if (locals.status === 'open') { %>checked<% } %>>
+				<label for="status-open">Open</label>
+				<input id="status-closed" type="radio" name="status" value="closed" <% if (locals.status === 'closed') { %>checked<% } %>>
+				<label for="status-closed">Closed</label>
+			</div>
 		</fieldset>
 		<fieldset>
-			<input id="sort-votes" type="radio" name="sort" value="votes" <% if (locals.sort === 'votes') { %>checked<% } %>>
-			<label for="sort-votes">Votes</label>
-			<input id="sort-newest" type="radio" name="sort" value="newest" <% if (locals.sort === 'newest') { %>checked<% } %>>
-			<label for="sort-newest">Newest</label>
+			<div>
+				<input id="sort-votes" type="radio" name="sort" value="votes" <% if (locals.sort === 'votes') { %>checked<% } %>>
+				<label for="sort-votes">Votes</label>
+				<input id="sort-newest" type="radio" name="sort" value="newest" <% if (locals.sort === 'newest') { %>checked<% } %>>
+				<label for="sort-newest">Newest</label>
+			</div>
 		</fieldset>
-		<button type="submit">Search</button>
+		<button type="submit" class="big blue">Search</button>
 	</form>
 	<% locals.requests.forEach(request => { %>
 	<article class="<% if (request.score < 0) { %>negative <% } %><% if (request.userVoted === 1) { %>voted-up<% } %><% if (request.userVoted === -1) { %>voted-down<% } %>">
