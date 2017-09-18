@@ -1,10 +1,12 @@
 <%- include('partials/head.ejs'); %>
 
-<% if (!locals.loggedIn) { %>
-	<a href="/auth">Login with GitHub</a>
-<% } %>
+<div class="links">
+	<% if (!locals.loggedIn) { %>
+	<a href="/auth" class="big green">Login with GitHub</a>
+	<% } %>
 
-<a href="#suggest-feature" class="big-blue">Suggest a Feature</a>
+	<a href="#suggest-feature" class="big blue">Suggest a Feature</a>
+</div>
 
 <section class="top-rated">
 	<% locals.requests.forEach(request => { %>
@@ -48,7 +50,7 @@
 
 		<label for="content">Description</label>
 		<textarea rows="5" id="content" name="content" placeholder="Please explain why this enhancement is the best idea ever"></textarea>
-		<button class="big-blue" type="submit">Submit new request</button>
+		<button class="big blue" type="submit">Submit new request</button>
 	</form>
 </div>
 <div class="overlay-bg"></div>
