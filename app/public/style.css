@@ -125,9 +125,13 @@ a[href="/logout"]:hover path { fill: white; }
 	text-decoration: none;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	font-weight: 500;
 }
 
-.big:hover { box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); }
+.big:hover {
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	cursor: pointer;
+}
 
 .big:focus {
 	outline: 0;
@@ -675,16 +679,25 @@ main.write-comment {
 	left: 50%;
 	transform: translate(-50%, -75%);
 	padding: 2em;
-	min-width: 18.75em;
 	opacity: 0;
 	transition: 300ms cubic-bezier(0, 0, 0.2, 1);
 	pointer-events: none;
+	width: 94%;
+	height: 94%;
+	max-width: 35em;
+	max-height: 35em;
 }
 
 .modal:target {
 	opacity: 1;
 	transform: translate(-50%, -50%);
 	pointer-events: initial;
+}
+
+.modal form {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .modal form > * {
@@ -709,7 +722,9 @@ main.write-comment {
 
 .modal form textarea {
 	border-left: 1px solid #666;
-	padding-left: 0.25em;
+	line-height: 1.4;
+	padding-left: 1em;
+	flex-grow: 1;
 }
 
 .modal + .overlay-bg {
