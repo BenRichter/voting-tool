@@ -245,7 +245,7 @@ a.back:hover::after {
 /* Loading blocker
  * ========================================================================== */
 body.loading {
-	transition: 350ms cubic-bezier(0, 0, 0.2, 1);
+	transition: 500ms cubic-bezier(0, 0, 0.2, 1);
 	filter: blur(2px);
 	overflow: hidden;
 	cursor: wait;
@@ -261,7 +261,7 @@ body.loading {
 	z-index: 150;
 	pointer-events: none;
 	opacity: 0;
-	transition: 350ms cubic-bezier(0, 0, 0.2, 1);
+	transition: 500ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 body.loading .loading-blocker {
