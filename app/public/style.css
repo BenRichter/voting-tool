@@ -569,6 +569,7 @@ main.write-comment {
 	align-items: center;
 	padding: 0;
 	height: 100%;
+	padding-right: 1em;
 }
 
 .write-comment textarea {
@@ -586,6 +587,9 @@ main.write-comment {
 }
 
 .write-comment button:focus { outline: 0; }
+.write-comment button:hover {
+	cursor: pointer;
+}
 
 .write-comment button:focus path:first-of-type,
 .write-comment button:hover path:first-of-type { fill: #fff; }
