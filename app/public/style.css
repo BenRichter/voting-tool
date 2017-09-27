@@ -7,6 +7,7 @@
 	color: inherit;
 	margin: 0;
 	font-size: inherit;
+	box-sizing: border-box;
 }
 
 ::selection {
@@ -27,7 +28,6 @@ body { height: 100%; }
 body {
 	background-color: #333;
 	color: white;
-	padding: 0 1em;
 	max-width: 62.5em;
 	margin: 0 auto;
 	padding: 2em;
@@ -382,8 +382,8 @@ body.loading .loading-blocker {
 .links .big { margin-left: 1em; }
 
 .top-rated {
-	margin-top: 2em;
 	position: relative;
+	margin-bottom: 10em;
 }
 
 .top-rated article:first-of-type { margin-top: 2em; }
