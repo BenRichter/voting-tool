@@ -56,7 +56,9 @@
 		<% request.comments.forEach(comment => { %>
 		<article>
 			<aside>
-				<img class="<% if (comment.userVote) { %><%= comment.userVote %><% } %>" src="https://github.com/<%= comment.username %>.png?size=60" alt="<%= comment.username %>">
+				<a href="https://github.com/<%= comment.username %>">
+					<img class="<% if (comment.userVote) { %><%= comment.userVote %><% } %>" src="https://github.com/<%= comment.username %>.png?size=60" alt="<%= comment.username %>">
+				</a>
 			</aside>
 			<main>
 			<% if (editMode && comment.editAllowed) { %>
