@@ -491,7 +491,7 @@ body.loading .loading-blocker {
 	background-color: #222;
 	margin-left: 1em;
 	border-radius: 2px;
-	padding: 1em;
+	padding: 0 1em;
 	line-height: 140%;
 	position: relative;
 }
@@ -500,6 +500,11 @@ body.loading .loading-blocker {
 	max-width: 38.5em;
 	overflow-x: scroll;
 	-webkit-overflow-scrolling: touch;
+	height: 100%;
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .comments footer {
@@ -534,7 +539,7 @@ body.loading .loading-blocker {
 
 .comments main pre { white-space: pre; }
 
-.comments main p { margin-bottom: 1em; }
+.comments main p { margin: 1em 0; }
 
 .comments main::before {
 	content: '';
@@ -555,15 +560,22 @@ body.loading .loading-blocker {
 
 /* Comment
  * ========================================================================== */
-.write-comment {
+main.write-comment {
+	padding: 0;
+}
+
+.write-comment form {
 	display: flex;
 	align-items: center;
+	padding: 0;
 	height: 100%;
 }
 
 .write-comment textarea {
 	flex-grow: 1;
 	margin-right: 1em;
+	padding: 1em;
+	height: 100%;
 }
 
 .write-comment textarea:focus { outline: 0; }

@@ -90,8 +90,8 @@
 			<aside>
 				<img src="https://github.com/<%= username %>.png?size=60" alt="<%= username %>">
 			</aside>
-			<main>
-				<form method="post" action="/comment" class="write-comment">
+			<main class="write-comment">
+				<form method="post" action="/comment">
 					<input type="hidden" name="request_id" value="<%= request.id %>">
 					<textarea rows="1" placeholder="Add a comment here..." name="content"></textarea>
 					<button type="submit">
