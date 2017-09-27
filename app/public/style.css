@@ -468,6 +468,7 @@ body.loading .loading-blocker {
 .comments aside {
 	flex-basis: 3.75em;
 	flex-shrink: 0;
+	position: relative;
 }
 
 .comments aside img {
@@ -483,6 +484,22 @@ body.loading .loading-blocker {
 
 .comments aside img.voted.down {
 	box-shadow: 0 0 0 4px #e53935;
+}
+
+.comments .placard {
+	text-transform: uppercase;
+	background-color: #3498db;
+	font-weight: 500;
+	border-radius: 2px;
+	text-align: center;
+	padding: 2px 4px;
+	font-size: 0.725em;
+	margin: 0 auto;
+	position: absolute;
+	left: 0;
+	right: 0;
+	width: max-content;
+	top: 48px;
 }
 
 .comments main {

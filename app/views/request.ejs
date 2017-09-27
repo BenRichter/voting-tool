@@ -58,6 +58,11 @@
 			<aside>
 				<a href="https://github.com/<%= comment.username %>">
 					<img class="<% if (comment.userVote) { %><%= comment.userVote %><% } %>" src="https://github.com/<%= comment.username %>.png?size=60" alt="<%= comment.username %>">
+					<% if (comment.userIsAdmin) { %>
+					<div class="placard">
+						Admin
+					</div>
+					<% } %>
 				</a>
 			</aside>
 			<main>

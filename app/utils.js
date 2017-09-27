@@ -1,6 +1,8 @@
 const marked = require('marked');
 const dateToRelative = require('timeago.js')().format;
 
+const adminUsers = require('./admin-users.json');
+
 marked.setOptions({
   gfm: true,
   sanitize: true
@@ -77,6 +79,8 @@ const parseRequestData = (request, username) => {
       const userHasVoted = userVotes.hasOwnProperty(comment.username);
       let userVote = userHasVoted ? getUserVote(comment.username) : null;
 
+      const userIsAdmin = adminUsers.includes(comment.username);
+
       return {
         id: comment.id,
         username: comment.username,
@@ -86,7 +90,8 @@ const parseRequestData = (request, username) => {
         userVote,
         date,
         dateRelative,
-        editAllowed
+        editAllowed,
+        userIsAdmin
       };
     });
 
