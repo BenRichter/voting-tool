@@ -6,8 +6,8 @@
   "extends": [
     "eslint:recommended"
   ],
-  parserOptions: {
-    ecmaVersion: 6
+  "parserOptions": {
+    "ecmaVersion": 6
   },
   "rules": {
     "quotes": [1, "single"],

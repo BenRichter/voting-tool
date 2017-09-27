@@ -72,7 +72,12 @@ const newRequest = (req, res) => {
     .then(({ data: request }) => {
       comment.request_id = request.id;
 
-      return directus.createItem('comments', comment);
+      directus.createItem('comments', comment)
+        .then(() => res.redirect('/r/' + request.id))
+        .catch(err => {
+          console.error(err);
+          return res.status(500).end();
+        });
     })
     .catch(err => {
       console.error(err);

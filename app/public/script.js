@@ -51,8 +51,13 @@
   var sortForm = document.querySelector('.sorting-options');
 
   if (sortForm) {
+    // Hide search submit button when JS is enabled
     sortForm.querySelector('button').remove();
+
     sortForm.addEventListener('change', function () {
+      // Set body class to loading (enable blocker overlay)
+      document.body.classList.add('loading');
+      // Submit form on change
       return this.submit();
     });
   }
