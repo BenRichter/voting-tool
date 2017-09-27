@@ -180,15 +180,16 @@ a.back:hover::after {
 	align-items: center;
 }
 
-.vote-buttons button path {
+.vote-buttons path {
 	fill: #666;
 	transition: 200ms cubic-bezier(0.4, 0, 0, 1);
 }
 
-.vote-buttons button:focus { outline: 0; }
+.vote-buttons button:focus,
+.vote-buttons a:focus { outline: 0; }
 
-.vote-buttons button:hover path,
-.vote-buttons button:focus path { fill: white; }
+.vote-buttons path:hover,
+.vote-buttons path:focus { fill: white; }
 
 .votes-count {
 	font-size: 1.5em;
