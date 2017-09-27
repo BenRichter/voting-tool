@@ -640,13 +640,25 @@ main.write-comment {
 	border-color: white;
 }
 
+.single-title > div {
+	flex-grow: 1;
+}
+
+.single-title form {
+	width: 100%;
+}
+
+.single-title input {
+	width: calc(100% - 60px);
+}
+
 .single-title > div button {
 	position: absolute;
 	right: 0;
 	display: flex;
 	width: 2.5em;
 	height: 2.5em;
-	border: 1px solid #3498db;
+	border: 2px solid #3498db;
 	border-radius: 50%;
 	justify-content: center;
 	align-items: center;

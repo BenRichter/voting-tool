@@ -47,9 +47,18 @@
 			</form>
 			<% } else { %>
 				<h1><%= request.title %></h1>
-				<% if (request.editAllowed) { %><a href="?edit=1">edit</a><% } %>
 			<% } %>
-			<footer>Created <time datetime="<%= request.date %>"><%= request.dateRelative %></time> by <a href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
+			<footer>
+				Created
+				<time datetime="<%= request.date %>">
+					<%= request.dateRelative %>
+				</time>
+				by
+				<a href="https://github.com/<%= request.username %>">
+					<%= request.username %>
+				</a>
+				<% if (editMode === false && request.editAllowed) { %> &bull; <a href="?edit=1">edit</a><% } %>
+			</footer>
 		</div>
 	</div>
 	<section class="comments">
