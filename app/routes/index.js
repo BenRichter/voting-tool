@@ -27,8 +27,8 @@ const renderHomepage = (req, res) => {
       requests.map(request => parseRequestData(request, username))
     )
     .then(requests => {
-      if (sort === 'newest') {
-        return requests.sort((a, b) => (a.date < b.date ? 1 : -1));
+      if (sort === 'date') {
+        return requests.sort((a, b) => (a.last_updated < b.last_updated ? 1 : -1));
       }
       return requests.sort((a, b) => (a.score < b.score ? 1 : -1));
     })
