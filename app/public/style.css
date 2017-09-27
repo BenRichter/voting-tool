@@ -136,7 +136,6 @@ a[href="/logout"]:hover path { fill: white; }
 
 .using-mouse .big:focus { box-shadow: none; }
 .big.blue { background-color: #3498db; }
-.big.green { background-color: #4caf4f; }
 
 /* Back to Listing
  * ========================================================================== */
