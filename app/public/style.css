@@ -242,6 +242,32 @@ a.back:hover::after {
 	height: 1.25em;
 }
 
+/* Loading blocker
+ * ========================================================================== */
+body.loading {
+	transition: 350ms cubic-bezier(0, 0, 0.2, 1);
+	filter: blur(2px);
+	overflow: hidden;
+	cursor: wait;
+}
+
+.loading-blocker {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(61, 61, 61, 0.8);
+	z-index: 150;
+	pointer-events: none;
+	opacity: 0;
+	transition: 350ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+body.loading .loading-blocker {
+	opacity: 1;
+	pointer-events: auto;
+}
 /* ==========================================================================
  * Index page listing & single heading
  * ========================================================================== */
