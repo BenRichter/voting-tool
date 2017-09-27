@@ -54,7 +54,9 @@ const parseRequestData = (request, username) => {
 
   const getUserVote = username => {
     const value = userVotes[username];
-    return value === 1 ? 'voted up' : 'voted down';
+    if (value)
+      return value === 1 ? 'voted up' : 'voted down';
+    else return false;
   };
 
   const userVoted = userVotes[username] || false;
@@ -73,7 +75,7 @@ const parseRequestData = (request, username) => {
         comment.last_updated && comment.last_updated !== comment.date;
 
       const userHasVoted = userVotes.hasOwnProperty(comment.username);
-      let userVote = userHasVoted ? getUserVote(username) : null;
+      let userVote = userHasVoted ? getUserVote(comment.username) : null;
 
       return {
         id: comment.id,
