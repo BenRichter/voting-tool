@@ -36,7 +36,11 @@
 	<% locals.requests.forEach(request => { %>
 	<article class="<% if (request.score < 0) { %>negative <% } %><% if (request.userVoted === 1) { %>voted-up<% } %><% if (request.userVoted === -1) { %>voted-down<% } %>">
 		<aside>
-			<p class="votes-count"><%= request.score %></p>
+			<p class="votes-count">
+				<a href="/r/<%= request.id %>">
+					<%= request.score %>
+				</a>
+			</p>
 			<% if (locals.loggedIn) { %>
 			<div class="vote-buttons">
 				<form method="post" action="/vote">
