@@ -142,6 +142,8 @@ a[href="/logout"]:hover path { fill: white; }
 a.back {
 	text-decoration: none;
 	position: relative;
+	display: inline-block;
+	margin-bottom: 1.2em;
 }
 
 a.back svg {
@@ -154,10 +156,10 @@ a.back:focus { outline: 0; }
 a.back::after {
 	content: '';
 	display: block;
-	width: 100%;
+	width: calc(100% - 0.5em - 20px);
 	position: absolute;
 	bottom: -6px;
-	left: 0;
+	right: 0;
 	background-color: white;
 	height: 1px;
 	transform: scaleX(0);
