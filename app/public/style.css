@@ -30,7 +30,7 @@ body {
 	padding: 0 1em;
 	max-width: 62.5em;
 	margin: 0 auto;
-	padding: 2em 1em;
+	padding: 2em;
 }
 
 img { max-width: 100%; }
@@ -71,6 +71,17 @@ footer a:hover {
 	color: white;
 	outline: 0;
 	text-decoration-color: white;
+}
+
+body > header {
+	fill: white;
+	text-align: center;
+	margin-bottom: 7em;
+}
+
+body > header svg {
+	max-width: 7em;
+	margin-bottom: 1em;
 }
 
 /* ==========================================================================
