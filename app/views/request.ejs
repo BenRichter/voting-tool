@@ -110,7 +110,7 @@
 				<time datetime="<%= comment.date %>"><%= comment.dateRelative %></time> &bull;
 				<a href="https://github.com/<%= comment.username %>"><%= comment.username %></a>
 				<% if (comment.edited) { %>&bull; edited<% } %>
-				<% if (comment.editAllowed) { %> &bull; <a href="?edit=1">edit</a><% } %>
+				<% if (comment.editAllowed && editMode === false) { %> &bull; <a href="?edit=1">edit</a><% } %>
 			</footer>
 		</article>
 		<% }) %>
