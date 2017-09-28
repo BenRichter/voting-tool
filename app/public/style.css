@@ -603,15 +603,18 @@ main.write-comment {
 	flex-grow: 1;
 	margin-right: 1em;
 	padding: 1em;
-	height: 100%;
+	overflow-y: hidden;
+	height: 0;
 }
 
 .write-comment textarea:focus { outline: 0; }
 
 .write-comment path:first-of-type {
-	fill: white;
+	fill: #666;
 	transition: 200ms cubic-bezier(0.4, 0, 0, 1);
 }
+
+.write-comment .edit path:first-of-type { fill: white }
 
 .write-comment button:focus { outline: 0; }
 .write-comment button:hover {
@@ -619,7 +622,10 @@ main.write-comment {
 }
 
 .write-comment button:focus path:first-of-type,
-.write-comment button:hover path:first-of-type { fill: #3498db; }
+.write-comment button:hover path:first-of-type { fill: #fff; }
+
+.write-comment .edit button:focus path:first-of-type,
+.write-comment .edit button:hover path:first-of-type { fill: #3498db; }
 
 /* Title
  * ========================================================================== */

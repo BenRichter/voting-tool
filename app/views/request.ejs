@@ -91,7 +91,7 @@
 			</aside>
 			<main <% if (editMode && comment.editAllowed) { %>class="write-comment"<% } %>>
 			<% if (editMode && comment.editAllowed) { %>
-				<form method="post" action="/comment" >
+				<form method="post" action="/comment" class="edit">
 					<input type="hidden" name="comment_id" value="<%= comment.id %>">
 					<input type="hidden" name="request_id" value="<%= request.id %>">
 					<textarea name="content"><%= comment.content %></textarea>
