@@ -739,7 +739,12 @@ main.write-comment {
 }
 
 .modal form input,
-.modal form textarea { margin-bottom: 2em; }
+.modal form textarea {
+	margin-bottom: 2em;
+	border-left: 1px solid #666;
+	padding-left: 1em;
+	transition: 200ms cubic-bezier(0.4, 0, 0, 1);
+}
 
 .modal form input:focus,
 .modal form textarea:focus {
@@ -747,15 +752,8 @@ main.write-comment {
 	outline: 0;
 }
 
-.modal form input {
-	border-bottom: 1px solid #666;
-	padding-bottom: 0.25em;
-}
-
 .modal form textarea {
-	border-left: 1px solid #666;
 	line-height: 1.4;
-	padding-left: 1em;
 	flex-grow: 1;
 }
 
