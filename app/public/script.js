@@ -4,16 +4,22 @@
   var commentTextarea = document.querySelector('.write-comment textarea');
 
   if (commentTextarea) {
-    function onInput() {
-      this.style.height = 'auto';
-      this.style.height = (this.scrollHeight) + 'px';
-    }
+    commentTextarea.addEventListener('input', function() {
+      adjustHeight(commentTextarea, 54);
+    }, false);
 
-    commentTextarea.addEventListener('input', onInput, false);
-
-    onInput.call(commentTextarea);
+    adjustHeight(commentTextarea, 54);
   }
 
+  function adjustHeight(textareaElement, minHeight) {
+    var outerHeight = parseInt(window.getComputedStyle(textareaElement).height, 10);
+
+    var diff = outerHeight - textareaElement.clientHeight;
+
+    textareaElement.style.height = 0;
+
+    textareaElement.style.height = Math.max(minHeight, textareaElement.scrollHeight + diff) + 'px';
+  }
 
   // Only show focus styles to keyboard users
   function handleFirstTab(e) {

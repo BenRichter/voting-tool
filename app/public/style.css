@@ -129,10 +129,6 @@ a[href="/logout"]:hover path { fill: white; }
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 	font-weight: 500;
-}
-
-.big:hover {
-	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	cursor: pointer;
 }
 
@@ -143,6 +139,7 @@ a[href="/logout"]:hover path { fill: white; }
 
 .using-mouse .big:focus { box-shadow: none; }
 .big.blue { background-color: #3498db; }
+.big.blue:hover { background-color: #268fd1}
 
 /* Back to Listing
  * ========================================================================== */
@@ -170,12 +167,12 @@ a.back::after {
 	background-color: white;
 	height: 1px;
 	transform: scaleX(0);
-	transition: 200ms cubic-bezier(0.4, 0, 1, 1);
+	transition: 100ms cubic-bezier(0.4, 0, 1, 1);
 }
 
 a.back:focus::after,
 a.back:hover::after {
-	transition: 200ms cubic-bezier(0, 0, 0.2, 1);
+	transition: 100ms cubic-bezier(0, 0, 0.2, 1);
 	transform: scaleX(1);
 }
 
@@ -197,8 +194,8 @@ a.back:hover::after {
 .vote-buttons button:focus,
 .vote-buttons a:focus { outline: 0; }
 
-.vote-buttons path:hover,
-.vote-buttons path:focus { fill: white; }
+.vote-buttons :hover path,
+.vote-buttons :focus path { fill: white; }
 
 .votes-count {
 	font-size: 1.5em;
@@ -222,6 +219,11 @@ a.back:hover::after {
 	color: #4b98d9;
 }
 
+.votes-count a:focus {
+	outline: 0;
+	box-shadow: 0 0 0 2px white;
+}
+
 .negative .votes-count { color: #e53935; }
 
 .voted-up .votes-count { box-shadow: 0 0 0 2px #3498db; }
@@ -241,6 +243,20 @@ a.back:hover::after {
 	font-size: 0.875em;
 	color: #666;
 	text-decoration: none;
+	fill: #666;
+	transition: 200ms cubic-bezier(0.4, 0, 0, 1);
+}
+
+.comments-link svg {
+	height: 1.25em;
+	width: 1.25em;
+	vertical-align: -30%;
+	margin-left: 0.5em;
+}
+
+.comments-link:hover {
+	color: white;
+	fill: white;
 }
 
 .comments-link:focus {
@@ -249,17 +265,6 @@ a.back:hover::after {
 }
 
 .using-mouse .comments-link:focus { box-shadow: none; }
-
-.comments-link::after {
-	content: '';
-	display: inline-block;
-	vertical-align: -32%;
-	margin-left: 0.5em;
-	background-image: url('/speech-bubble.svg');
-	background-size: cover;
-	width: 1.25em;
-	height: 1.25em;
-}
 
 /* Loading blocker
  * ========================================================================== */
@@ -426,6 +431,7 @@ body.loading .loading-blocker {
 	position: relative;
 	width: max-content;
 	max-width: 100%;
+	text-shadow: -1px 0 0 #333, -2px 0 0 #333, 1px 0 0 #333, 2px 0 0 #333, 0 2px 0 #333, 0 1px 0 #333, 0 -1px 0 #333, 0 -2px 0 #333;
 }
 
 .top-rated h2::after {
@@ -437,7 +443,12 @@ body.loading .loading-blocker {
 	background-color: white;
 	height: 1px;
 	transform: scaleX(0);
-	transition: 200ms cubic-bezier(0.4, 0, 1, 1);
+	transition: 100ms cubic-bezier(0.4, 0, 1, 1);
+	z-index: -1;
+}
+
+.top-rated h2::selection {
+	text-shadow: none;
 }
 
 .top-rated a:hover h2::after,
@@ -482,15 +493,18 @@ body.loading .loading-blocker {
 	width: 3.75em;
 	height: 3.75em;
 	border-radius: 50%;
-	box-shadow: 0 0 0 4px white;
+	box-shadow: inset 0 0 0 2px white;
+	border: 2px solid white;
 }
 
 .comments aside img.voted.up {
-	box-shadow: 0 0 0 4px #3498db;
+	box-shadow: inset 0 0 0 2px #3498d;
+	border: 2px solid #3498db;
 }
 
 .comments aside img.voted.down {
-	box-shadow: 0 0 0 4px #e53935;
+	box-shadow: inset 0 0 0 2px #e53935;
+	border: 2px solid #e53935;
 }
 
 .comments .placard {
@@ -559,11 +573,45 @@ body.loading .loading-blocker {
 .comments main a { color: #3498db; }
 
 .comments main pre,
-.comments main code { font-family: monospace; }
+.comments main code {
+	font-family: monospace;
+}
 
-.comments main pre { white-space: pre; }
+.comments main code {
+	background-color: #333;
+	padding: 2px 6px;
+	display: inline-block;
+	border-radius: 2px;
+}
+
+.comments main pre {
+	white-space: pre;
+	margin: 20px 0;
+}
 
 .comments main p { margin: 1em 0; }
+
+.comments main ul,
+.comments main ol {
+	margin: 20px 0;
+}
+
+.comments main table {
+	margin: 20px 0;
+	border: 1px solid #333;
+	border-collapse: collapse;
+}
+
+.comments main thead {
+	background-color: #333;
+	color: #666;
+}
+
+.comments main table td,
+.comments main table th {
+	padding: 10px 15px;
+	text-align: left;
+}
 
 .comments main::before {
 	content: '';
@@ -594,13 +642,22 @@ main.write-comment {
 	padding: 0;
 	height: 100%;
 	padding-right: 1em;
+	justify-content: space-between;
+}
+
+.write-comment button {
+	line-height: 0;
 }
 
 .write-comment textarea {
 	flex-grow: 1;
 	margin-right: 1em;
 	padding: 1em;
-	height: 100%;
+	height: 54px;
+	max-width: 38.5em;
+	max-height: 494px;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
 }
 
 .write-comment textarea:focus { outline: 0; }
@@ -610,6 +667,8 @@ main.write-comment {
 	transition: 200ms cubic-bezier(0.4, 0, 0, 1);
 }
 
+.write-comment .edit path:first-of-type { fill: white }
+
 .write-comment button:focus { outline: 0; }
 .write-comment button:hover {
 	cursor: pointer;
@@ -617,6 +676,9 @@ main.write-comment {
 
 .write-comment button:focus path:first-of-type,
 .write-comment button:hover path:first-of-type { fill: #fff; }
+
+.write-comment .edit button:focus path:first-of-type,
+.write-comment .edit button:hover path:first-of-type { fill: #3498db; }
 
 /* Title
  * ========================================================================== */
@@ -722,7 +784,12 @@ main.write-comment {
 }
 
 .modal form input,
-.modal form textarea { margin-bottom: 2em; }
+.modal form textarea {
+	margin-bottom: 2em;
+	border-left: 1px solid #666;
+	padding-left: 1em;
+	transition: 200ms cubic-bezier(0.4, 0, 0, 1);
+}
 
 .modal form input:focus,
 .modal form textarea:focus {
@@ -730,15 +797,8 @@ main.write-comment {
 	outline: 0;
 }
 
-.modal form input {
-	border-bottom: 1px solid #666;
-	padding-bottom: 0.25em;
-}
-
 .modal form textarea {
-	border-left: 1px solid #666;
 	line-height: 1.4;
-	padding-left: 1em;
 	flex-grow: 1;
 }
 

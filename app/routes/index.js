@@ -20,19 +20,21 @@ const renderHomepage = (req, res) => {
     .getItems('requests', {
       depth: 1,
       status: 1,
-      'in[closed]': status === 'closed' ? 1 : 0
+      'in[closed]': status === 'closed' ? 1 : 0,
+      'order[last_updated]': 'ASC'
     })
     .then(({ data }) => data.filter(request => request.active === 1))
     .then(requests =>
       requests.map(request => parseRequestData(request, username))
     )
+    .then(requests => requests.filter(request => request.score >= -5))
     .then(requests => {
       if (sort === 'date') {
         return requests.sort((a, b) => (a.last_updated < b.last_updated ? 1 : -1));
       }
       return requests.sort((a, b) => (a.score < b.score ? 1 : -1));
     })
-    .then(requests => res.render('index', { sort, status, loggedIn, requests, username }))
+    .then(requests => res.render('index', { sort, status, loggedIn, requests, username, showTitle: true }))
     .catch(err => {
       console.error(err);
       res.status(500).end();
@@ -46,7 +48,7 @@ const logout = (req, res) => {
 
 module.exports = router
   .use('/auth', auth)
-  .use('/vote', vote)
+  .post('/vote', (req, res) => vote(req, res))
   .get('/', renderHomepage)
   .get('/logout', logout)
   .use('/comment', comment)
