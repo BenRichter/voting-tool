@@ -1,6 +1,6 @@
 const directus = require('../directus');
 
-const vote = (req, res, redirectToItem) => {
+const vote = (req, res, redirectToItem = false) => {
   const id = req.body.request_id;
   const action = req.body.action;
   const username = req.user;
@@ -44,7 +44,7 @@ const vote = (req, res, redirectToItem) => {
       return directus.createItem('votes', newVote);
     })
     .then(() => {
-      if (redirectToItem)
+      if (Boolean(redirectToItem) === true)
         res.redirect('/r/' + id);
       else
         res.redirect(req.header('Referer'));
