@@ -18,7 +18,11 @@
 
     textareaElement.style.height = 0;
 
-    textareaElement.style.height = Math.max(minHeight, textareaElement.scrollHeight + diff) + 'px';
+    if (isNaN(diff)) {
+      textareaElement.style.height = minHeight + 'px';
+    } else {
+      textareaElement.style.height = Math.max(minHeight, textareaElement.scrollHeight + diff) + 'px';
+    }
   }
 
   // Only show focus styles to keyboard users
