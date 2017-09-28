@@ -194,8 +194,8 @@ a.back:hover::after {
 .vote-buttons button:focus,
 .vote-buttons a:focus { outline: 0; }
 
-.vote-buttons path:hover,
-.vote-buttons path:focus { fill: white; }
+.vote-buttons :hover path,
+.vote-buttons :focus path { fill: white; }
 
 .votes-count {
 	font-size: 1.5em;
@@ -217,6 +217,11 @@ a.back:hover::after {
 
 .votes-count a:hover {
 	color: #4b98d9;
+}
+
+.votes-count a:focus {
+	outline: 0;
+	box-shadow: 0 0 0 2px white;
 }
 
 .negative .votes-count { color: #e53935; }
