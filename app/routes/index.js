@@ -20,12 +20,14 @@ const renderHomepage = (req, res) => {
     .getItems('requests', {
       depth: 1,
       status: 1,
-      'in[closed]': status === 'closed' ? 1 : 0
+      'in[closed]': status === 'closed' ? 1 : 0,
+      'order[last_updated]': 'ASC'
     })
     .then(({ data }) => data.filter(request => request.active === 1))
     .then(requests =>
       requests.map(request => parseRequestData(request, username))
     )
+    .then(requests => requests.filter(request => request.score >= -5))
     .then(requests => {
       if (sort === 'date') {
         return requests.sort((a, b) => (a.last_updated < b.last_updated ? 1 : -1));
