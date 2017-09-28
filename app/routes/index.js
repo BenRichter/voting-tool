@@ -34,7 +34,7 @@ const renderHomepage = (req, res) => {
       }
       return requests.sort((a, b) => (a.score < b.score ? 1 : -1));
     })
-    .then(requests => res.render('index', { sort, status, loggedIn, requests, username }))
+    .then(requests => res.render('index', { sort, status, loggedIn, requests, username, showTitle: true }))
     .catch(err => {
       console.error(err);
       res.status(500).end();
