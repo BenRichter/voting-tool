@@ -482,15 +482,18 @@ body.loading .loading-blocker {
 	width: 3.75em;
 	height: 3.75em;
 	border-radius: 50%;
-	box-shadow: 0 0 0 4px white;
+	box-shadow: inset 0 0 0 2px white;
+	border: 2px solid white;
 }
 
 .comments aside img.voted.up {
-	box-shadow: 0 0 0 4px #3498db;
+	box-shadow: inset 0 0 0 2px #3498d;
+	border: 2px solid #3498db;
 }
 
 .comments aside img.voted.down {
-	box-shadow: 0 0 0 4px #e53935;
+	box-shadow: inset 0 0 0 2px #e53935;
+	border: 2px solid #e53935;
 }
 
 .comments .placard {
