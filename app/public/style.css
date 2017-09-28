@@ -241,6 +241,20 @@ a.back:hover::after {
 	font-size: 0.875em;
 	color: #666;
 	text-decoration: none;
+	fill: #666;
+	transition: 200ms cubic-bezier(0.4, 0, 0, 1);
+}
+
+.comments-link svg {
+	height: 1.25em;
+	width: 1.25em;
+	vertical-align: -30%;
+	margin-left: 0.5em;
+}
+
+.comments-link:hover {
+	color: white;
+	fill: white;
 }
 
 .comments-link:focus {
@@ -249,17 +263,6 @@ a.back:hover::after {
 }
 
 .using-mouse .comments-link:focus { box-shadow: none; }
-
-.comments-link::after {
-	content: '';
-	display: inline-block;
-	vertical-align: -32%;
-	margin-left: 0.5em;
-	background-image: url('/speech-bubble.svg');
-	background-size: cover;
-	width: 1.25em;
-	height: 1.25em;
-}
 
 /* Loading blocker
  * ========================================================================== */
