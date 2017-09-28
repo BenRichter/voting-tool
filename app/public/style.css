@@ -573,11 +573,45 @@ body.loading .loading-blocker {
 .comments main a { color: #3498db; }
 
 .comments main pre,
-.comments main code { font-family: monospace; }
+.comments main code {
+	font-family: monospace;
+}
 
-.comments main pre { white-space: pre; }
+.comments main code {
+	background-color: #333;
+	padding: 2px 6px;
+	display: inline-block;
+	border-radius: 2px;
+}
+
+.comments main pre {
+	white-space: pre;
+	margin: 20px 0;
+}
 
 .comments main p { margin: 1em 0; }
+
+.comments main ul,
+.comments main ol {
+	margin: 20px 0;
+}
+
+.comments main table {
+	margin: 20px 0;
+	border: 1px solid #333;
+	border-collapse: collapse;
+}
+
+.comments main thead {
+	background-color: #333;
+	color: #666;
+}
+
+.comments main table td,
+.comments main table th {
+	padding: 10px 15px;
+	text-align: left;
+}
 
 .comments main::before {
 	content: '';
