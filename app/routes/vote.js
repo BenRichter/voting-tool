@@ -1,8 +1,6 @@
-const router = require('express').Router();
-
 const directus = require('../directus');
 
-const vote = (req, res) => {
+const vote = (req, res, redirectToItem) => {
   const id = req.body.request_id;
   const action = req.body.action;
   const username = req.user;
@@ -45,11 +43,16 @@ const vote = (req, res) => {
 
       return directus.createItem('votes', newVote);
     })
-    .then(() => res.redirect(req.header('Referer')))
+    .then(() => {
+      if (redirectToItem)
+        res.redirect('/r/' + id);
+      else
+        res.redirect(req.header('Referer'));
+    })
     .catch(err => {
       console.error(err);
       res.status(500).end();
     });
 };
 
-module.exports = router.post('/', vote);
+module.exports = vote;

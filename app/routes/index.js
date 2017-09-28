@@ -46,7 +46,7 @@ const logout = (req, res) => {
 
 module.exports = router
   .use('/auth', auth)
-  .use('/vote', vote)
+  .post('/vote', vote)
   .get('/', renderHomepage)
   .get('/logout', logout)
   .use('/comment', comment)

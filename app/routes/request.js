@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const vote = require('./vote');
 
 const { dateToString, parseRequestData, noAuthNoPlay } = require('../utils');
 const directus = require('../directus');
@@ -73,7 +74,17 @@ const newRequest = (req, res) => {
       comment.request_id = request.id;
 
       directus.createItem('comments', comment)
-        .then(() => res.redirect('/r/' + request.id))
+        .then(() => {
+          // Change body to right values to be able to vote
+
+          req.body = {
+            request_id: request.id,
+            username,
+            action: 'plus'
+          };
+
+          return vote(req, res, true);
+        })
         .catch(err => {
           console.error(err);
           return res.status(500).end();
