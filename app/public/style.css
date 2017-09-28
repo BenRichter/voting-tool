@@ -609,7 +609,7 @@ main.write-comment {
 .write-comment textarea:focus { outline: 0; }
 
 .write-comment path:first-of-type {
-	fill: #666;
+	fill: white;
 	transition: 200ms cubic-bezier(0.4, 0, 0, 1);
 }
 
@@ -619,7 +619,7 @@ main.write-comment {
 }
 
 .write-comment button:focus path:first-of-type,
-.write-comment button:hover path:first-of-type { fill: #fff; }
+.write-comment button:hover path:first-of-type { fill: #3498db; }
 
 /* Title
  * ========================================================================== */
