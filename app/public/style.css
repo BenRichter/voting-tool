@@ -597,6 +597,7 @@ main.write-comment {
 	padding: 0;
 	height: 100%;
 	padding-right: 1em;
+	justify-content: space-between;
 }
 
 .write-comment button {
@@ -607,8 +608,11 @@ main.write-comment {
 	flex-grow: 1;
 	margin-right: 1em;
 	padding: 1em;
-	overflow-y: hidden;
-	height: 0;
+	height: 54px;
+	max-width: 38.5em;
+	max-height: 494px;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
 }
 
 .write-comment textarea:focus { outline: 0; }
