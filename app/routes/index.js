@@ -6,7 +6,7 @@ const vote = require('./vote');
 const comment = require('./comment');
 
 const directus = require('../directus');
-const { parseDate, dateToString, parseRequestData } = require('../utils');
+const { parseRequestData } = require('../utils');
 
 const renderHomepage = (req, res) => {
   const username = req.user;
@@ -20,8 +20,7 @@ const renderHomepage = (req, res) => {
     .getItems('requests', {
       depth: 1,
       status: 1,
-      'in[closed]': status === 'closed' ? 1 : 0,
-      'order[last_updated]': 'ASC'
+      'in[closed]': status === 'closed' ? 1 : 0
     })
     .then(({ data }) => data.filter(request => request.active === 1))
     .then(requests =>
@@ -30,7 +29,7 @@ const renderHomepage = (req, res) => {
     .then(requests => requests.filter(request => request.score >= -5))
     .then(requests => {
       if (sort === 'date') {
-        return requests.sort((a, b) => (a.last_updated < b.last_updated ? 1 : -1));
+        return requests.sort((a, b) => (a.comments[a.comments.length - 1].date < b.comments[b.comments.length - 1].date ? 1 : -1));
       }
       return requests.sort((a, b) => (a.score < b.score ? 1 : -1));
     })

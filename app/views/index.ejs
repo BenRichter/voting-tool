@@ -15,7 +15,7 @@
 				<input id="sort-votes" type="radio" name="sort" value="votes" <% if (locals.sort === 'votes') { %>checked<% } %>>
 				<label for="sort-votes" title="Order by vote score">Votes</label>
 				<input id="sort-date" type="radio" name="sort" value="date" <% if (locals.sort === 'date') { %>checked<% } %>>
-				<label for="sort-date" title="Order by date updated">Date</label>
+				<label for="sort-date" title="Order by most recent activity">Date</label>
 			</div>
 		</fieldset>
 		<button type="submit" class="big blue">Search</button>
@@ -75,7 +75,11 @@
 		</aside>
 		<div>
 			<a href="/r/<%= request.id %>" title="<%= request.title %>"><h2><%= request.title %></h2></a>
-			<footer>Created <time datetime="<%= request.date %>" title="<%= request.date %>"><%= request.dateRelative %></time> by <a title="View <%= request.username %> on GitHub" href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
+			<% if (locals.sort === 'date') { %>
+				<footer>Last commented on <time datetime="<%= request.comments[request.comments.length - 1].date %>" title="<%= request.comments[request.comments.length - 1].date %>"><%= request.comments[request.comments.length - 1].dateRelative %></time> by <a title="View <%= request.comments[request.comments.length - 1].username %> on GitHub" href="https://github.com/<%= request.comments[request.comments.length - 1].username %>"><%= request.comments[request.comments.length - 1].username %></a></footer>
+			<% } else { %>
+				<footer>Created <time datetime="<%= request.date %>" title="<%= request.date %>"><%= request.dateRelative %></time> by <a title="View <%= request.username %> on GitHub" href="https://github.com/<%= request.username %>"><%= request.username %></a></footer>
+			<% } %>
 		</div>
 		<% if (request.comments.length > 0) { %>
 		<a class="comments-link" href="/r/<%= request.id %>">
