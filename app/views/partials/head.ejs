@@ -2,27 +2,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><%= locals.title ? locals.title + ' |' : null %> Directus Feature Request</title>
-<link href="/style.css?v=1.0.3" rel="stylesheet">
+<link href="/style.css?v=1.0.4" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700" type="text/css">
 
-<meta name="description" content="Directus is a headless CMS and API for managing your project’s database content – not your development process. Create database architectures based on specific project needs, design websites and applications without any limitations, and follow any development workflow you prefer.">
+<meta name="description" content="<%= locals.description ? locals.description : 'Request new Directus features or vote on existing submissions' %>">
 <meta name="keywords" content="Headless CMS, Decoupled, Content Management System, Open Source, Free, Directus, API, SDK, SQL, MySQL, DB GUI, DBaaS, Custom Database, Schema, RANGER Studio, Framework, Website, Native App, Content Delivery, Hosted">
 <meta name="author" content="Directus">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="mobile-web-app-capable" content="yes">
 
-<meta property="og:title" content="Directus: Open-Source Headless CMS and API"/>
-<meta property="og:image" content="http://request.getdirectus.com/directus-logo-800-sq-dark.png"/>
+<meta property="og:title" content="<%= locals.title ? locals.title + ' |' : null %> Directus Feature Request"/>
+<meta property="og:image" content="https://request.getdirectus.com/directus-logo-800-sq-dark.png"/>
 <meta property="og:site_name" content="Directus"/>
-<meta property="og:description" content="Directus is a headless CMS and API for managing your project’s database content – not your development process. Create database architectures based on specific project needs, design websites and applications without any limitations, and follow any development workflow you prefer."/>
+<meta property="og:description" content="<%= locals.description ? locals.description : 'Request new Directus features or vote on existing submissions' %>"/>
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@directus" />
-<meta name="twitter:title" content="Directus: Open-Source Headless CMS and API" />
-<meta name="twitter:description" content="Directus is a headless CMS and API for managing your project’s database content – not your development process. Create database architectures based on specific project needs, design websites and applications without any limitations, and follow any development workflow you prefer." />
-<meta name="twitter:image" content="http://request.getdirectus.com/directus-logo-800-sq-dark.png" />
-<meta name="twitter:url" content="http://request.getdirectus.com/" />
+<meta name="twitter:title" content="<%= locals.title ? locals.title + ' |' : null %> Directus Feature Request" />
+<meta name="twitter:description" content="<%= locals.description ? locals.description : 'Request new Directus features or vote on existing submissions' %>" />
+<meta name="twitter:image" content="https://request.getdirectus.com/directus-logo-800-sq-dark.png" />
+<meta name="twitter:url" content="https://request.getdirectus.com/" />
 
 <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
@@ -41,7 +41,7 @@
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
-<script src="/script.js?v=1.0.3" defer></script>
+<script src="/script.js?v=1.0.4" defer></script>
 <header>
 	<svg viewBox="0 0 151 92" width="151" height="92" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414">
 		<title>Directus</title>

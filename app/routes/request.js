@@ -16,7 +16,15 @@ const renderRequest = (req, res) => {
     .getItem('requests', id)
     .then(response => response.data)
     .then(data => parseRequestData(data, username))
-    .then(request => ({ request, editMode, title: request.title, username })) // add editMode key to locals
+    .then(request => ({
+      request,
+      editMode,
+      title: request.title,
+      description: request.comments[0].content.length > 177 ?
+        request.comments[0].content.substring(0, 177) + '...' :
+        request.comments[0].content,
+      username
+    })) // add editMode key to locals
     .then(locals => res.render('request', locals))
     .catch(err => {
       console.error(err);

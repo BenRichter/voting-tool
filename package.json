@@ -1,7 +1,7 @@
 {
   "name": "voting-tool",
   "private": true,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple tool for accepting community submissions (eg: feature requests) that can be voted into a priority ranking",
   "main": "app/index.js",
   "dependencies": {

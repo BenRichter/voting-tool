@@ -565,7 +565,7 @@ body.loading .loading-blocker {
 	top: 48px;
 	right: 0;
 	left: 0;
-	width: max-content;
+	width: 4.1em;
 	padding: 2px 4px;
 	margin: 0 auto;
 	background-color: #3498db;
@@ -592,6 +592,11 @@ body.loading .loading-blocker {
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
+	position: relative;
+}
+
+.comments main > div > * {
+	max-width: 100%;
 	-webkit-overflow-scrolling: touch;
 	overflow-x: scroll;
 }
