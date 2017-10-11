@@ -24,9 +24,16 @@ const parseDate = dateString => {
  * @param  {Date} dateObj
  * @return {String}
  */
-const dateToString = dateObj =>
-  `${dateObj.getFullYear()}-${dateObj.getMonth() +
-    1}-${dateObj.getDate()} ${dateObj.getHours()}:${dateObj.getMinutes()}:${dateObj.getSeconds()}`;
+const dateToString = dateObj => {
+  const year = dateObj.getFullYear();
+  const month = ('00' + (dateObj.getMonth() + 1)).slice(-2);
+  const date = ('00' + dateObj.getDate()).slice(-2);
+  const hours = ('00' + dateObj.getHours()).slice(-2);
+  const minutes = ('00' + dateObj.getMinutes()).slice(-2);
+  const seconds = ('00' + dateObj.getSeconds()).slice(-2);
+
+  return `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
+}
 
 /**
  * Parses a single request down to a usable data object to be rendered
