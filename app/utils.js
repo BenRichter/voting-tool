@@ -38,8 +38,8 @@ const dateToString = dateObj =>
 const parseRequestData = (request, username) => {
   const editAllowed = request.username === username;
 
-  const date = parseDate(request.date);
-  const dateRelative = dateToRelative(date);
+  const date = request.date ? parseDate(request.date) : '';
+  const dateRelative = request.date ? dateToRelative(date) : '';
 
   const votes = request.votes.data.filter(vote => vote.active === 1);
   const upvotes = votes.filter(vote => vote.value === 1);
@@ -70,8 +70,8 @@ const parseRequestData = (request, username) => {
 
       const content = comment.content;
       const contentParsed = marked(content);
-      const date = parseDate(comment.date);
-      const dateRelative = dateToRelative(date);
+      const date = comment.date ? parseDate(comment.date) : '';
+      const dateRelative = comment.date ? dateToRelative(date) : '';
 
       const edited =
         comment.last_updated && comment.last_updated !== comment.date;
